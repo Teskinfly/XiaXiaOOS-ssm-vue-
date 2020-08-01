@@ -72,4 +72,10 @@ public class OrderController {
         List<Orders> byUId = orderService.findByUId(Integer.valueOf(parse.getId()));
         return new DataReturn(ReturnCode.SUCCESS,byUId);
     }
+    @RequestMapping("/delOrder")
+    public DataReturn delOrder(Integer oid) {
+        if (oid == null) return new DataReturn(ReturnCode.FAIL);
+        orderService.delOrders(oid);
+        return new DataReturn(ReturnCode.SUCCESS);
+    }
 }

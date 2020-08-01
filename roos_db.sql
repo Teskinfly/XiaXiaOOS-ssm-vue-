@@ -11,7 +11,7 @@
  Target Server Version : 50528
  File Encoding         : 65001
 
- Date: 01/08/2020 11:04:44
+ Date: 01/08/2020 11:40:52
 */
 
 SET NAMES utf8mb4;
@@ -81,7 +81,7 @@ INSERT INTO `food` VALUES (40, '炒饭', 7, 'images/food/food3.jpg', 3, '好吃'
 INSERT INTO `food` VALUES (41, '可乐', 3, 'images/food/food1.jpg', 1, '好喝', 80);
 INSERT INTO `food` VALUES (42, '水煮鱼', 20, 'images/food/waterFish.jpg', 7, '好吃', 100);
 INSERT INTO `food` VALUES (43, '饺子', 6, 'images/food/jiaozi.jpg', 10, '好吃', 20);
-INSERT INTO `food` VALUES (45, '鱼香肉丝', 15, '345B820AD1494A2E930FD0DC924AB31A-20200119104004_81493.jpg', 6, 'good', 1);
+INSERT INTO `food` VALUES (45, '鱼香肉丝', 15, 'images/food/AE077E0FA14E494C925A9D5410690C0B-123.jpg', 6, 'good', 1);
 INSERT INTO `food` VALUES (48, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', 3);
 INSERT INTO `food` VALUES (51, '韩式酱汤', 15, 'images/food/3AC9182C4C554067914CE8D80F46B0CA-xiaxia.jpg', 4, '大虾、角瓜、土豆、元葱、冻豆腐、淘米水、韩式大酱、鸡精、味道。', 0);
 INSERT INTO `food` VALUES (52, '可乐', 3, 'images/food/food1.jpg', 1, '好喝', 80);
@@ -131,12 +131,13 @@ CREATE TABLE `orders`  (
   `o_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`o_id`) USING BTREE,
   INDEX `o_u_id`(`o_u_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 78 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 80 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (77, '2020-08-01', '微信支付', 2, 3.00, '用户已接收', '#可乐-3', '广东省梅州市嘉应学院江北校区南七409');
+INSERT INTO `orders` VALUES (78, '2020-08-01', '支付宝', 2, 26.00, '用户已接收', '#可乐-3#雪碧-4#炒饭-7#梅菜扣肉-12', '广东省梅州市嘉应学院江北校区南区***');
+INSERT INTO `orders` VALUES (79, '2020-08-01', '支付宝', 2, 47.00, '饭店接单中', '#韩式酱汤-15#梅菜扣肉-12#水煮鱼-20', '广东省梅州市嘉应学院江北校区南区***');
 
 -- ----------------------------
 -- Table structure for user

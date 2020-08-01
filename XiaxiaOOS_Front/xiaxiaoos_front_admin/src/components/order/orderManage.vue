@@ -17,6 +17,7 @@
         <el-table-column prop="opayment" label="支付方式"> </el-table-column>
 
         <el-table-column prop="oprice" label="总价"> </el-table-column>
+        <el-table-column prop="oaddress" label="地址"> </el-table-column>
         <el-table-column prop="ostatus" label="订单状态"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
@@ -26,11 +27,12 @@
               circle
               @click="edit(scope.row)"
             ></el-button>
+
             <el-button
               type="danger"
               icon="el-icon-delete"
               circle
-              @click="delete scope.row"
+              @click="deleteOrder(scope.row)"
             ></el-button>
           </template>
         </el-table-column>
@@ -119,15 +121,19 @@ export default {
       this.oid = row.oid;
       this.dialogVisible = true;
     },
-    delete(row) {
-      console.log(row);
+    async deleteOrder(row) {
+      console.log(row)
+      const { data: res } = await this.$axios.get(
+        "order/delOrder?oid=" + row.oid
+      );
+      console.log(res);
+      this.$message.success("删除成功");
+      this.getOrderList()
     },
     async submitOrders() {
       const { data: res } = await this.$axios.get(
         "/order/changeStatus?oid=" + this.oid
       );
-      // console.log(this.oid)
-      // console.log(res)
       this.dialogVisible = false;
       this.getOrderList();
     },
