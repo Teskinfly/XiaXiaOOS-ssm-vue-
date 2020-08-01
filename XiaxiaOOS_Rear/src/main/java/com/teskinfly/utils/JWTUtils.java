@@ -22,7 +22,7 @@ public class JWTUtils {
                 .setSubject("name")
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256,key);
-        builder.setExpiration(new Date(end));
+//        builder.setExpiration(new Date(end));
         return builder.compact();
     }
     public Claims parse(String token) {

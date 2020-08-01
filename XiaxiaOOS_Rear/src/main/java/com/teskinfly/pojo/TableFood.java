@@ -16,6 +16,7 @@ public class TableFood {
     String desc;
     Integer price;
     Integer amount;
+    String img;
     String type;
     List<TableFood> next = new ArrayList<>();
     public TableFood() {
@@ -36,6 +37,7 @@ public class TableFood {
         tableFood.setPrice(food.getFPrice());
         tableFood.setId(food.getFCId()+"-"+food.getFId());
         tableFood.setRid(food.getFId()+" ");
+        tableFood.setImg(food.getFImg());
         return next.add(tableFood);
     }
     @Override

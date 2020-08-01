@@ -1,6 +1,7 @@
 package com.teskinfly.service;
 
 import com.teskinfly.domain.Orders;
+import com.teskinfly.domain.User;
 
 import java.util.Date;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public interface IOrderService {
     List<Orders> findAll(int total, int pageNum);
 
-    void addOrder(Orders order);
+    void addOrder(Orders order, User user);
 
     Orders findById(Integer oId);
 

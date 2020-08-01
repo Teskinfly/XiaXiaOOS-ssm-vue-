@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 @Setter
 @Getter
+//留言
+//有时间再做
 public class Message implements Serializable {
     Integer mId;
     Integer mFId;

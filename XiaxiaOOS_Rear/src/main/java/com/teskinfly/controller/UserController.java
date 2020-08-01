@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,8 +32,9 @@ public class UserController {
         if (!userService.correctUser(user.getUName(),user.getUPwd()))
             return new DataReturn(ReturnCode.FAIL);
         User u = userService.findByName(user.getUName());
+        u.setUPwd("");
         String s = jwt.create(u.getUId(), u.getUName());
-        return new DataReturn(ReturnCode.SUCCESS,s);
+        return new DataReturn(new ArrayList(){{add(u);}},ReturnCode.SUCCESS,s);
     }
     @RequestMapping("/getUserList")
     TableReturn getUserList(@RequestBody TableReturn tableReturn,HttpServletRequest request) {

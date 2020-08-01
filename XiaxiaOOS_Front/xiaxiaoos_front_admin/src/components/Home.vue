@@ -52,7 +52,12 @@ export default {
   data() {
     return {
       activePath: "",
-      menuIcon: ["el-icon-goods","el-icon-fork-spoon",  "el-icon-s-data","el-icon-document-remove"],
+      menuIcon: [
+        "el-icon-goods",
+        "el-icon-fork-spoon",
+        "el-icon-s-data",
+        "el-icon-document-remove",
+      ],
       menuList: [
         {
           id: "0",
@@ -109,7 +114,7 @@ export default {
               authName: "订单管理",
               path: "orderManage",
               children: [],
-            }
+            },
           ],
         },
       ],
@@ -146,12 +151,10 @@ export default {
     }
     .title {
       width: 20%;
-      // background: rgb(84, 92, 100);
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: x-large;
-      // background: red;
     }
   }
   .el-aside {

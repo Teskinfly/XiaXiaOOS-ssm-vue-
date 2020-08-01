@@ -15,19 +15,23 @@ public class Orders implements Serializable {
     String oPrice;
     String oStatus;
     String oContent;
+    String oAddress;
     User user;
 
     public Orders() {
 
     }
 
-    public Orders(String oDate, String oPayment, Integer oUId, String oPrice, String oStatus, String oContent) {
+    public Orders(Integer oId, String oDate, String oPayment, Integer oUId, String oPrice, String oStatus, String oContent, String oAddress, User user) {
+        this.oId = oId;
         this.oDate = oDate;
         this.oPayment = oPayment;
         this.oUId = oUId;
         this.oPrice = oPrice;
         this.oStatus = oStatus;
         this.oContent = oContent;
+        this.oAddress = oAddress;
+        this.user = user;
     }
 
     @Override

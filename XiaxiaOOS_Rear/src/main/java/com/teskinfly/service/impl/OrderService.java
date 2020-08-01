@@ -2,6 +2,7 @@ package com.teskinfly.service.impl;
 
 import com.teskinfly.dao.IOrderDao;
 import com.teskinfly.domain.Orders;
+import com.teskinfly.domain.User;
 import com.teskinfly.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,12 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public void addOrder(Orders order) {
+    public void addOrder(Orders order, User user) {
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        order.setODate(simpleDateFormat.format(date));
+        order.setOStatus("饭店接单中");
+        order.setOAddress(user.getUAddress());
         orderDao.addOrder(order);
     }
 
