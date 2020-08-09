@@ -22,7 +22,7 @@ public class serviceTest {
 //        userService.delUser(9);
         CategoryService categoryService = context.getBean("categoryService", CategoryService.class);
         List<Category> all = categoryService.findAll();
-        for (Category category:all) {
+        for (Category category : all) {
             List<Food> foods = category.getFoods();
             System.out.println(category);
             System.out.println(foods);

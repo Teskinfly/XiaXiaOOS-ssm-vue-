@@ -42,7 +42,9 @@ public class DataAnalyzeController {
         System.out.println(endDate);
         List<Orders> byDate = orderService.findByDate(beginDate, endDate);
         ChartsOption chartsOption = GenerateChartsOption.generateIncomeData(byDate);
-        return new DataReturn(new ArrayList(){{add(chartsOption);}},ReturnCode.SUCCESS,null);
+        return new DataReturn(new ArrayList() {{
+            add(chartsOption);
+        }}, ReturnCode.SUCCESS, null);
     }
 }
 

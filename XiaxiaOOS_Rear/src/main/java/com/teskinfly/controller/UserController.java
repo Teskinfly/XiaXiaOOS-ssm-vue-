@@ -26,21 +26,26 @@ public class UserController {
     UserService userService;
     @Autowired
     JWTUtils jwt;
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     DataReturn login(@RequestBody User user) {
 //        System.out.println(user);
-        if (!userService.correctUser(user.getUName(),user.getUPwd()))
+        if (!userService.correctUser(user.getUName(), user.getUPwd()))
             return new DataReturn(ReturnCode.FAIL);
         User u = userService.findByName(user.getUName());
         u.setUPwd("");
         String s = jwt.create(u.getUId(), u.getUName());
-        return new DataReturn(new ArrayList(){{add(u);}},ReturnCode.SUCCESS,s);
+        return new DataReturn(new ArrayList() {{
+            add(u);
+        }}, ReturnCode.SUCCESS, s);
     }
+
     @RequestMapping("/getUserList")
-    TableReturn getUserList(@RequestBody TableReturn tableReturn,HttpServletRequest request) {
+    TableReturn getUserList(@RequestBody TableReturn tableReturn, HttpServletRequest request) {
 //        System.out.println(tableReturn);
         String authorization = request.getHeader("Authorization");
-        if (authorization == null) return new TableReturn(tableReturn.getTotal(),tableReturn.getPageNum(),null,ReturnCode.WITHOUTTOKEN);
+        if (authorization == null)
+            return new TableReturn(tableReturn.getTotal(), tableReturn.getPageNum(), null, ReturnCode.WITHOUTTOKEN);
         if (tableReturn.getQuery() == "") {
             List<User> listUser = userService.getListUser(tableReturn.getTotal(), tableReturn.getPageNum());
             tableReturn.setData(listUser);
@@ -50,8 +55,9 @@ public class UserController {
         tableReturn.setData(users);
         return tableReturn;
     }
+
     @RequestMapping("/addUser")
-    DataReturn addUser(@RequestBody User user,HttpServletRequest request) {
+    DataReturn addUser(@RequestBody User user, HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
         if (authorization == null) return new DataReturn(ReturnCode.WITHOUTTOKEN);
 //        System.out.println(user);
@@ -59,7 +65,8 @@ public class UserController {
         userService.addUser(user);
         return new DataReturn(ReturnCode.SUCCESS);
     }
-    @RequestMapping(value = "/delUser",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/delUser", method = RequestMethod.GET)
     DataReturn delUser(@RequestParam("uid") Integer uId, HttpServletRequest request) {
         System.out.println(uId);
         String authorization = request.getHeader("Authorization");

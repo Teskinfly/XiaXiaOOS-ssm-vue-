@@ -24,17 +24,17 @@
     </bean>
     <!--配置SqlSessionFactory工厂-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
     </bean>
     <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.teskinfly.dao"/>
     </bean>
-<!--    token-->
+    <!--    token-->
     <bean id="jwtutils" class="com.teskinfly.utils.JWTUtils">
         <constructor-arg name="key" value="lqkishandsomeboy"></constructor-arg>
         <constructor-arg name="ttl" value="10000"></constructor-arg>
     </bean>
-<!--    注册converter-->
+    <!--    注册converter-->
     <bean id="conversionService"
           class="org.springframework.context.support.ConversionServiceFactoryBean">
         <property name="converters">
@@ -43,10 +43,10 @@
             </set>
         </property>
     </bean>
-<!--    upload-->
+    <!--    upload-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="10485760"></property>
     </bean>
-<!--    redis -->
+    <!--    redis -->
 
 </beans>

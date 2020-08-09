@@ -7,6 +7,7 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:8080/XiaXiaOOS/'
 axios.interceptors.request.use(config=>{
   config.headers.Authorization = window.sessionStorage.getItem("token")
+  // console.log(config)
   return config
 })
 Vue.prototype.$axios = axios

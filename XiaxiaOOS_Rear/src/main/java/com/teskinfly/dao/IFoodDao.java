@@ -34,11 +34,14 @@ public interface IFoodDao {
 
     @Update("delete from food where f_id = #{fId}")
     int delFood(Integer fId);
+
     @Select("select *from food limit #{lo} , #{hi}")
     @ResultMap("foodMap")
     List<Food> getLimitFood(@Param("lo") int lo, @Param("hi") int hi);
+
     @Select("select count(*) from food")
     int getTotalCount();
+
     @Select("select *from food where f_name = #{fName}")
     @ResultMap("foodMap")
     Food findByName(String fName);

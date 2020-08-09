@@ -33,68 +33,81 @@ public class FoodController {
     CategoryService categoryService;
     @Autowired
     GenerateListTableFood generateListTableFood;
+
     @RequestMapping("findAllFood")
     public TableReturn findAll(HttpServletRequest request) {
         List<TableFood> generate = generateListTableFood.generate();
-        return new TableReturn(generate,ReturnCode.SUCCESS);
+        return new TableReturn(generate, ReturnCode.SUCCESS);
     }
+
     @RequestMapping("/addCategory")
     public DataReturn addCategory(@RequestBody Category category) {
         if (category == null) return new DataReturn(ReturnCode.FAIL);
         categoryService.addCategory(category);
         return new DataReturn(ReturnCode.SUCCESS);
     }
+
     @RequestMapping("/updateCategory")
     public DataReturn updateCategory(@RequestBody Category category) {
         categoryService.updateCategory(category);
         return new DataReturn(ReturnCode.SUCCESS);
     }
+
     @RequestMapping("/deleteCategory")
     public DataReturn deleteCategory(int cid) {
         categoryService.delCategory(cid);
         return new DataReturn(ReturnCode.SUCCESS);
     }
+
     @RequestMapping("/addFood")
     public DataReturn addFood(@RequestBody Food food) {
         foodService.addFood(food);
         return new DataReturn(ReturnCode.SUCCESS);
     }
+
     @RequestMapping("/updateFood")
     public DataReturn updateFood(@RequestBody Food food) {
         foodService.updateFood(food);
         return new DataReturn(ReturnCode.SUCCESS);
     }
+
     @RequestMapping("/deleteFood")
     public DataReturn delFood(int fid) {
         Food byId = foodService.findById(fid);
         String fImg = byId.getFImg();
-        File file = new File(picPath + "//"+fImg);
+        File file = new File(picPath + "//" + fImg);
         if (file.isFile()) file.delete();
         foodService.delFood(fid);
         return new DataReturn(ReturnCode.SUCCESS);
     }
+
     @RequestMapping("/upload")
-    public DataReturn upload(@RequestParam("picture")MultipartFile pic, HttpServletRequest request) {
+    public DataReturn upload(@RequestParam("picture") MultipartFile pic, HttpServletRequest request) {
 //        System.out.println("i am in");
         String realPath = request.getSession().getServletContext().getRealPath(picPath);
         File filePath = new File(realPath);
-        if (!filePath.exists()&&!filePath.isDirectory()) {
+        if (!filePath.exists() && !filePath.isDirectory()) {
             filePath.mkdir();
         }
-        String uuid = UUID.randomUUID().toString().replaceAll("-","").toUpperCase();
+        String uuid = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
         String fileName = uuid + "-" + pic.getOriginalFilename();
         try {
-            pic.transferTo(new File(realPath,fileName));
-            return new DataReturn(ReturnCode.SUCCESS,new ArrayList(){{add(picPath+"/"+fileName);}});
+            pic.transferTo(new File(realPath, fileName));
+            return new DataReturn(ReturnCode.SUCCESS, new ArrayList() {{
+                add(picPath + "/" + fileName);
+            }});
         } catch (IOException e) {
 //            e.printStackTrace();
             return new DataReturn(ReturnCode.FAIL);
         }
 
     }
+
     @RequestMapping("getFoodById")
     public DataReturn getFoodById(Integer fid) {
         Food byId = foodService.findById(fid);
-        return new DataReturn(ReturnCode.SUCCESS,new ArrayList(){{add(byId);}});
+        return new DataReturn(ReturnCode.SUCCESS, new ArrayList() {{
+            add(byId);
+        }});
     }
 }

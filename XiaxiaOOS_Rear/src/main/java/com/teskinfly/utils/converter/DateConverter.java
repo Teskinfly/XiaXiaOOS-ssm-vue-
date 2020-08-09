@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateConverter implements Converter<String, Date>{
+public class DateConverter implements Converter<String, Date> {
     @Override
     public Date convert(String source) {
 //        System.out.println("I am in");

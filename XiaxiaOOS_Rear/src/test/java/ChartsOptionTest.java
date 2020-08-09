@@ -49,10 +49,10 @@ public class ChartsOptionTest {
         list2.add("30");
         list2.add("100");
         List<ChartsOption.Series> list4 = new ArrayList<>();
-        list4.add(chartsOption.new Series("销量","bar",list2));
+        list4.add(chartsOption.new Series("销量", "bar", list2));
         chartsOption.setSeries(list4);
         ArrayList<Object> list3 = new ArrayList<>();
         list3.add(chartsOption);
-        DataReturn dataReturn = new DataReturn(list3,ReturnCode.SUCCESS,null);
+        DataReturn dataReturn = new DataReturn(list3, ReturnCode.SUCCESS, null);
     }
 }

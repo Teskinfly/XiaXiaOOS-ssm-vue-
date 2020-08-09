@@ -9,15 +9,19 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class GenerateListTableFood {
     CategoryService categoryService;
+
     public GenerateListTableFood(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
-    public GenerateListTableFood(){
+
+    public GenerateListTableFood() {
 
     }
+
     @Autowired
     public void setCategoryService(CategoryService categoryService) {
         this.categoryService = categoryService;
@@ -29,9 +33,9 @@ public class GenerateListTableFood {
         }
         List<TableFood> result = new ArrayList<>();
         List<Category> all = categoryService.findAll();
-        for (Category category: all) {
+        for (Category category : all) {
             TableFood tableFood = new TableFood(category);
-            for (Food food: category.getFoods()){
+            for (Food food : category.getFoods()) {
                 tableFood.addFood(food);
             }
             result.add(tableFood);

@@ -30,36 +30,44 @@ public class OrderController {
     OrderService orderService;
     @Autowired
     UserService userService;
+
     @RequestMapping("/getSpecificOrders")
     public TableReturn getSpecificOrders(OrderSearch orderSearch) {
-        return new TableReturn(null,ReturnCode.FAIL);
+        return new TableReturn(null, ReturnCode.FAIL);
     }
+
     @RequestMapping("/getFormat")
     public TableReturn getFormat() {
-        return new TableReturn(new ArrayList(){{add(new TableReturn());}},ReturnCode.SUCCESS);
+        return new TableReturn(new ArrayList() {{
+            add(new TableReturn());
+        }}, ReturnCode.SUCCESS);
     }
+
     @RequestMapping("/getOrders")
     public TableReturn getOrders(@RequestBody TableReturn tableReturn) {
         List<Orders> all = orderService.findAll(tableReturn.getTotal(), tableReturn.getPageNum());
-        return new TableReturn(all,ReturnCode.SUCCESS);
+        return new TableReturn(all, ReturnCode.SUCCESS);
     }
+
     @RequestMapping("/changeStatus")
     public DataReturn changeStatus(Integer oid) {
         System.out.println(oid);
         Orders byId = orderService.findById(oid);
-        if (byId == null|| byId.getOStatus().equals("用户已接收")) {
+        if (byId == null || byId.getOStatus().equals("用户已接收")) {
             return new DataReturn(ReturnCode.FAIL);
         }
-        orderService.changeStatus(byId.getOStatus(),byId.getOId());
+        orderService.changeStatus(byId.getOStatus(), byId.getOId());
         return new DataReturn(ReturnCode.SUCCESS);
     }
+
     @RequestMapping("/addOrder")
     public DataReturn addOrder(@RequestBody Orders order) {
         if (order == null) return new DataReturn(ReturnCode.FAIL);
         User byId = userService.findById(order.getOUId());
-        orderService.addOrder(order,byId);
+        orderService.addOrder(order, byId);
         return new DataReturn(ReturnCode.SUCCESS);
     }
+
     @RequestMapping("/getOrdersByUser")
     public DataReturn getOrdersByUser(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
@@ -70,8 +78,9 @@ public class OrderController {
 //        System.out.println(parse);
 //        System.out.println(parse.getId());
         List<Orders> byUId = orderService.findByUId(Integer.valueOf(parse.getId()));
-        return new DataReturn(ReturnCode.SUCCESS,byUId);
+        return new DataReturn(ReturnCode.SUCCESS, byUId);
     }
+
     @RequestMapping("/delOrder")
     public DataReturn delOrder(Integer oid) {
         if (oid == null) return new DataReturn(ReturnCode.FAIL);

@@ -32,11 +32,14 @@ public interface IOrderDao {
 
     @Update("update orders set o_status = #{oStatus} where o_id = #{oId}")
     void updateStatus(@Param("oStatus") String oStatus, @Param("oId") Integer oId);
+
     @Select("select *from orders where o_u_id = #{oUId} order by o_date desc")
     @ResultMap("orderMap")
     List<Orders> findByUId(Integer oUId);
+
     @Update("delete from orders where o_id = #{oId}")
     void delOrders(Integer oId);
+
     @Select("select *from orders where o_date >= #{begin} and o_date <= #{end} order by o_date desc")
     @ResultMap("orderMap")
     List<Orders> getSpecificOrders(@Param("begin") String begin, @Param("end") String end);

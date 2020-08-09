@@ -51,15 +51,16 @@ public class UserService implements IUserService {
     }
 
     public List<User> getListUser(int total, int pageNum) {
-        return userDao.getListUser(total*(pageNum-1),total);
+        return userDao.getListUser(total * (pageNum - 1), total);
     }
 
     @Override
     public List<User> searchUser(String s) {
-         return userDao.searchByName(s);
+        return userDao.searchByName(s);
     }
+
     @Override
-    public void delUser(Integer id){
+    public void delUser(Integer id) {
         userDao.delUser(id);
     }
 

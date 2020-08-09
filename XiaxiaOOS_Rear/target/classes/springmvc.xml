@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
@@ -12,7 +13,17 @@
     <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
     <context:component-scan base-package="com.teskinfly"></context:component-scan>
     <!--配置的视图解析器对象-->
-<!--    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-<!--    </bean>-->
+    <!--    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+    <!--    </bean>-->
     <mvc:resources location="/images/" mapping="/images/**"/>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/admin/login"/>
+            <mvc:exclude-mapping path="/images/**"/>
+            <bean class="com.teskinfly.interceptor.MyInterceptor"></bean>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
 </beans>

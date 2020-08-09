@@ -16,6 +16,7 @@ public class AdminService implements IAdminService {
         if (byName == null) return false;
         return byName.getAPwd().equals(aPwd);
     }
+
     public Admin findByName(String aName) {
         return adminDao.findByName(aName);
     }

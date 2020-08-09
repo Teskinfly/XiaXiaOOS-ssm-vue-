@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 //购物车物品项
-@Setter@Getter
+@Setter
+@Getter
 public class CartItem {
     String id;
     int amount;

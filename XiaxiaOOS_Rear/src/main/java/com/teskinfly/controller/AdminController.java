@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
 @Controller
 @ResponseBody
 @RequestMapping("/admin")
@@ -23,12 +24,13 @@ public class AdminController {
     AdminService adminService;
     @Autowired
     JWTUtils jwt;
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     DataReturn login(@RequestBody Admin admin) {
-        if (!adminService.checkPwd(admin.getAName(),admin.getAPwd()))
+        if (!adminService.checkPwd(admin.getAName(), admin.getAPwd()))
             return new DataReturn(ReturnCode.FAIL);
         Admin byName = adminService.findByName(admin.getAName());
         String s = jwt.create(byName.getAId(), byName.getAName());
-        return new DataReturn(ReturnCode.SUCCESS,s);
+        return new DataReturn(ReturnCode.SUCCESS, s);
     }
 }

@@ -10,8 +10,9 @@ public class JwtDemo {
         JwtBuilder builder = Jwts.builder().setId("11")
                 .setSubject("lqk")
                 .setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256,"teskinfly");
+                .signWith(SignatureAlgorithm.HS256, "teskinfly");
         String token = builder.compact();
+        token = "aklfjwklewj";
         Claims claims = Jwts.parser().setSigningKey("teskinfly").parseClaimsJws(token).getBody();
         System.out.println(claims.getSubject());
     }

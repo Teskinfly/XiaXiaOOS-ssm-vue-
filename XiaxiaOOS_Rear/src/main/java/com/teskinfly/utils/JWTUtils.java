@@ -18,13 +18,14 @@ public class JWTUtils {
 
     public String create(Integer id, String name) {
         long end = System.currentTimeMillis() + ttl;
-        JwtBuilder builder = Jwts.builder().setId(id+"")
+        JwtBuilder builder = Jwts.builder().setId(id + "")
                 .setSubject("name")
                 .setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256,key);
+                .signWith(SignatureAlgorithm.HS256, key);
 //        builder.setExpiration(new Date(end));
         return builder.compact();
     }
+
     public Claims parse(String token) {
         return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
     }

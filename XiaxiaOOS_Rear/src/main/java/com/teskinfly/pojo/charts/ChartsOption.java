@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+
 public class ChartsOption {
     Title title;
     Legend legend;
@@ -14,31 +15,40 @@ public class ChartsOption {
     @JsonProperty
     Axis yAxis;
     List<Series> series;
-    @Setter@Getter
-    public class Title{
+
+    @Setter
+    @Getter
+    public class Title {
         String text;
+
         public Title(String text) {
             this.text = text;
         }
     }
-    @Setter@Getter
-    public class Legend{
+
+    @Setter
+    @Getter
+    public class Legend {
         List<String> data;
 
         public Legend(List<String> data) {
             this.data = data;
         }
     }
-    @Setter@Getter
-    public class Axis{
+
+    @Setter
+    @Getter
+    public class Axis {
         List<String> data;
 
         public Axis(List<String> data) {
             this.data = data;
         }
     }
-    @Setter@Getter
-    public class Series{
+
+    @Setter
+    @Getter
+    public class Series {
         String name;
         String type;
         List<String> data;
@@ -68,10 +78,12 @@ public class ChartsOption {
     public Legend getLegend() {
         return legend;
     }
+
     @JsonIgnore
     public Axis getXAxis() {
         return xAxis;
     }
+
     @JsonIgnore
     public Axis getYAxis() {
         return yAxis;
@@ -88,10 +100,12 @@ public class ChartsOption {
     public void setLegend(Legend legend) {
         this.legend = legend;
     }
+
     @JsonIgnore
     public void setXAxis(Axis xAxis) {
         this.xAxis = xAxis;
     }
+
     @JsonIgnore
     public void setYAxis(Axis yAxis) {
         this.yAxis = yAxis;

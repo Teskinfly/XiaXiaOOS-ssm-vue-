@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-@Setter@Getter
+
+@Setter
+@Getter
 public class TableReturn<T> {
     int total;
     int pageNum;
@@ -12,6 +14,7 @@ public class TableReturn<T> {
     String msg;
     int code;
     String query;
+
     public TableReturn() {
     }
 

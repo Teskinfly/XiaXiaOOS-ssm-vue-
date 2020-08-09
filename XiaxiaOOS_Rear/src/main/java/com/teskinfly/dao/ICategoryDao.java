@@ -14,7 +14,7 @@ public interface ICategoryDao {
             @Result(column = "c_id", property = "cId", id = true),
             @Result(column = "c_name", property = "cName"),
             @Result(column = "c_des", property = "cDesc"),
-            @Result(column = "c_id", property = "foods",many = @Many(select = "com.teskinfly.dao.IFoodDao.findByCId",fetchType = FetchType.EAGER))
+            @Result(column = "c_id", property = "foods", many = @Many(select = "com.teskinfly.dao.IFoodDao.findByCId", fetchType = FetchType.EAGER))
     })
     Category findById(Integer cId);
 

@@ -3,7 +3,8 @@ package com.teskinfly.pojo;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter@Getter
+@Setter
+@Getter
 public class OrderSearch {
     String status;
     String bTime;

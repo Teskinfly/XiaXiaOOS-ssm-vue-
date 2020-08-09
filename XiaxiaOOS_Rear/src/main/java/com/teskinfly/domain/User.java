@@ -13,6 +13,7 @@ public class User implements Serializable {
     String uPwd;
     String uPhone;
     String uAddress;
+
     public User() {
 
     }
@@ -23,7 +24,8 @@ public class User implements Serializable {
         this.uPhone = uPhone;
         this.uAddress = uAddress;
     }
-//    {"uName":"lqk","uPwd":"123"}
+
+    //    {"uName":"lqk","uPwd":"123"}
     @Override
     public String toString() {
         return "User{" +

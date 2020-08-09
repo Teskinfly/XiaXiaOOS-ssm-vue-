@@ -13,6 +13,7 @@ public class Category implements Serializable {
     String cName;
     String cDesc;
     List<Food> foods;
+
     public Category() {
     }
 
