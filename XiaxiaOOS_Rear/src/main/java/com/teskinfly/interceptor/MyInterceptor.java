@@ -19,17 +19,15 @@ public class MyInterceptor implements HandlerInterceptor {
     @Autowired
     JWTUtils jwtUtils;
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse resp, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if (request.getMethod().equals("OPTIONS")) {
+            return true;
+        }
         String authorization = request.getHeader("Authorization");
         try {
-//            System.out.println(authorization);
+            System.out.println(authorization);
             jwtUtils.parse(authorization);
         }catch (Exception e) {
-//            System.out.println("token 错误");
-//            resp.setCharacterEncoding("utf-8");
-//            resp.setContentType("application/json; charset=utf-8");
-//            PrintWriter writer = resp.getWriter();
-//            writer.write("Token error");
             return false;
         }
         return true;
