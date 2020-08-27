@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+<!--扫描redis配置文件-->
+<context:property-placeholder ignore-unresolvable="true" location="classpath:redis.properties"/>
+<!--设置连接池-->
+<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    <property name="maxIdle" value="${redis.maxIdle}"/>
+    <property name="maxTotal" value="${redis.maxTotal}" />
+    <property name="maxWaitMillis" value="${redis.maxWait}" />
+    <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    <property name="testOnReturn" value="${redis.testOnReturn}" />
+</bean>
+<!--设置链接属性-->
+<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+      p:hostName="${redis.host}"
+      p:port="${redis.port}"
+      p:password="${redis.password}"
+      p:pool-config-ref="poolConfig"
+      p:timeout="100000"/>
+<!-- Jedis模板配置  -->
+<!--    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">-->
+<!--        <property name="connectionFactory"   ref="connectionFactory" />-->
+<!--        -->
+<!--    </bean>-->
+<bean id="redisTemplate"
+      class="org.springframework.data.redis.core.StringRedisTemplate">
+    <property name="connectionFactory" ref="connectionFactory" />
+    <!-- 如果不配置Serializer，那么存储的时候只能使用String，如果用对象类型存储，那么会提示错误 can't cast to String！！！-->
+    <property name="keySerializer">
+        <!--对key的默认序列化器。默认值是StringSerializer-->
+        <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+    </property>
+    <!--是对value的默认序列化器，默认值是取自DefaultSerializer的JdkSerializationRedisSerializer。-->
+    <property name="valueSerializer">
+        <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+    </property>
+    <!--存储Map时key需要的序列化配置-->
+    <property name="hashKeySerializer">
+        <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+    </property>
+    <!--存储Map时value需要的序列化配置-->
+    <property name="hashValueSerializer">
+        <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+    </property>
+</bean>
+
+</beans>

@@ -9,6 +9,7 @@ import com.teskinfly.service.impl.AdminService;
 import com.teskinfly.service.impl.UserService;
 import com.teskinfly.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +25,11 @@ public class AdminController {
     AdminService adminService;
     @Autowired
     JWTUtils jwt;
-
+//    @Autowired
+//    RedisTemplate redisTemplate;
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     DataReturn login(@RequestBody Admin admin) {
+//        redisTemplate.opsForValue().append("teskinfly","handsome");//在这里测试
         if (!adminService.checkPwd(admin.getAName(), admin.getAPwd()))
             return new DataReturn(ReturnCode.FAIL);
         Admin byName = adminService.findByName(admin.getAName());

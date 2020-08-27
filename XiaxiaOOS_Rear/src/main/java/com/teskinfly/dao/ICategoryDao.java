@@ -22,6 +22,9 @@ public interface ICategoryDao {
     @ResultMap("categoryMap")
     List<Category> findAll();
 
+    @Select("select *from category where c_name = #{name}")
+    @ResultMap("categoryMap")
+    Category findByName(String name);
     @Update("insert category(c_id, c_name, c_des)values(#{cId}, #{cName}, #{cDesc})")
     void addCategory(Category category);
 

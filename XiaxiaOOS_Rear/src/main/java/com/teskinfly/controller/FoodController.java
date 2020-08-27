@@ -110,4 +110,8 @@ public class FoodController {
             add(byId);
         }});
     }
+    @RequestMapping("findAllCategory")
+    public List<Category> findAllCategory() {
+        return categoryService.findAll();
+    }
 }
