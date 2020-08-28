@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/rabbit
+    http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+<!--    <bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter" />-->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:rabbitmq/rabbitmq.properties"/>
+    <rabbit:connection-factory id="cachingConnectionFactory"
+                               username="${mq.username}" password="${mq.password}" host="${mq.host}" port="${mq.port}"
+                               virtual-host="/" />
+    <rabbit:template id="rabbitTemplate" connection-factory="cachingConnectionFactory"></rabbit:template>
+    <rabbit:admin connection-factory="cachingConnectionFactory" />
+    <rabbit:queue durable="true" id="rabbitQueue" name="teskinfly.xia.email.queue" auto-delete="false"></rabbit:queue>
+    <rabbit:direct-exchange name="teskinfly.xia.exch" durable="true" auto-delete="false">
+        <rabbit:bindings>
+            <rabbit:binding queue="teskinfly.xia.email.queue" key="teskinfly.user.email.key"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+<!--    消息接收-->
+    <bean id="emailSender" class="com.teskinfly.utils.email.EmailSender"></bean>
+    <rabbit:listener-container connection-factory="cachingConnectionFactory" acknowledge="auto">
+        <rabbit:listener ref="emailSender" queues="teskinfly.xia.email.queue"></rabbit:listener>
+    </rabbit:listener-container>
+</beans>

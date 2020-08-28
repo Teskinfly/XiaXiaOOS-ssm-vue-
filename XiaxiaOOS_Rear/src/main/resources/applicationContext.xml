@@ -49,4 +49,6 @@
     </bean>
     <!--    redis -->
     <import resource="classpath:spring-redis.xml"/>
+<!--    rabbitmq-->
+    <import resource="classpath:rabbitmq/spring-rabbitmq.xml"></import>
 </beans>
