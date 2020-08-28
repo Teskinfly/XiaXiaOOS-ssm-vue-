@@ -51,4 +51,6 @@
     <import resource="classpath:spring-redis.xml"/>
 <!--    rabbitmq-->
     <import resource="classpath:rabbitmq/spring-rabbitmq.xml"></import>
+<!-- email-->
+    <import resource="classpath:email/spring-email.xml"></import>
 </beans>

@@ -192,7 +192,21 @@
       <artifactId>spring-rabbit</artifactId>
       <version>1.6.5.RELEASE</version>
     </dependency>
+    <!--  emial-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>5.0.0.RELEASE</version>
+    </dependency>
+    <!--邮件发送-->
+    <dependency>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>javax.mail</artifactId>
+      <version>1.6.1</version>
+    </dependency>
   </dependencies>
+
+
 
   <build>
     <finalName>XiaxiaOOS_Rear</finalName>

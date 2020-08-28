@@ -22,7 +22,7 @@ public class UserService implements IUserService {
     public void addUser(User user) {
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
         rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME,MailConstants.MAIL_ROUTING_KEY_NAME,user);
-//        userDao.addUser(user);
+        userDao.addUser(user);
     }
     @Override
     public List<User> findAll() {
