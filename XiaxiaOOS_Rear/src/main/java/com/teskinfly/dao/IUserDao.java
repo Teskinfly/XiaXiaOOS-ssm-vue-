@@ -14,7 +14,8 @@ public interface IUserDao {
             @Result(column = "u_name", property = "uName"),
             @Result(column = "u_pwd", property = "uPwd"),
             @Result(column = "u_address", property = "uAddress"),
-            @Result(column = "u_pn", property = "uPhone")
+            @Result(column = "u_pn", property = "uPhone"),
+            @Result(column = "u_email", property = "uEmail")
     })
     List<User> findAll();
 
@@ -26,14 +27,14 @@ public interface IUserDao {
     @ResultMap("userMap")
     User findByName(String uName);
 
-    @Update("insert into user(u_name, u_pwd, u_pn, u_address)values(#{uName},#{uPwd},#{uPhone},#{uAddress})")
+    @Update("insert into user(u_name, u_pwd, u_pn, u_address, u_email)values(#{uName},#{uPwd},#{uPhone},#{uAddress},#{uEmail})")
     void addUser(User user);
 
     @Update("update user set u_pwd = #{uPwd} where u_id = #{uId}")
 //error
     void updatePwd(@Param("uPwd") String uPwd, @Param("uId") Integer uId);
 
-    @Update("update user set u_id = #{uId}, u_pwd = #{uPwd}, u_address = #{uAddress}, u_pn = #{uPhone}, u_name = #{uName} where u_id = #{uId}")
+    @Update("update user set u_id = #{uId}, u_pwd = #{uPwd}, u_address = #{uAddress}, u_pn = #{uPhone}, u_name = #{uName}, u_email = #{uEmail} where u_id = #{uId}")
     void updateInfo(User user);
 
     @Select("select *from user limit #{begin}, #{end}")

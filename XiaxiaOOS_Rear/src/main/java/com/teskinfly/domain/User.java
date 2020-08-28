@@ -13,19 +13,21 @@ public class User implements Serializable {
     String uPwd;
     String uPhone;
     String uAddress;
+    String uEmail;
 
     public User() {
 
     }
 
-    public User(String uName, String uPwd, String uPhone, String uAddress) {
+    public User(Integer uId, String uName, String uPwd, String uPhone, String uAddress, String eMail) {
+        this.uId = uId;
         this.uName = uName;
         this.uPwd = uPwd;
         this.uPhone = uPhone;
         this.uAddress = uAddress;
+        this.uEmail = eMail;
     }
 
-    //    {"uName":"lqk","uPwd":"123"}
     @Override
     public String toString() {
         return "User{" +
@@ -34,6 +36,7 @@ public class User implements Serializable {
                 ", uPwd='" + uPwd + '\'' +
                 ", uPhone='" + uPhone + '\'' +
                 ", uAddress='" + uAddress + '\'' +
+                ", eMail='" + uEmail + '\'' +
                 '}';
     }
 }

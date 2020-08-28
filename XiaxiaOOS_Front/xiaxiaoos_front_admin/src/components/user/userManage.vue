@@ -22,7 +22,7 @@
           </el-input>
         </el-col>
         <el-col :span="10">
-          <el-button type="primary" @click="dialogVisible = true"
+          <el-button type="primary" @click="showAddDialog"
             >添加用户</el-button
           >
           <el-dialog
@@ -50,6 +50,9 @@
                 <el-form-item label="电话号码">
                   <el-input v-model="user.uphone"></el-input>
                 </el-form-item>
+                <el-form-item label="电子邮件">
+                  <el-input v-model="user.uemail"></el-input>
+                </el-form-item>
               </el-form>
               <el-button @click="dialogVisible = false">取 消</el-button>
               <el-button type="primary" @click="submitUserInfo()"
@@ -73,14 +76,17 @@
                 <el-form-item label="名称">
                   <el-input v-model="user.uname"></el-input>
                 </el-form-item>
-                <el-form-item label="密码">
+                <!-- <el-form-item label="密码">
                   <el-input v-model="user.upwd"></el-input>
-                </el-form-item>
+                </el-form-item> -->
                 <el-form-item label="地址">
                   <el-input v-model="user.uaddress"></el-input>
                 </el-form-item>
                 <el-form-item label="电话号码">
                   <el-input v-model="user.uphone"></el-input>
+                </el-form-item>
+                <el-form-item label="邮件">
+                  <el-input v-model="user.uemail"></el-input>
                 </el-form-item>
               </el-form>
               <el-button @click="editDialogVisible = false">取 消</el-button>
@@ -102,6 +108,7 @@
         </el-table-column>
         <el-table-column prop="uphone" label="电话号码" width="250">
         </el-table-column>
+        <el-table-column prop="uemail" label="电子邮件" width="200"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -144,7 +151,7 @@ export default {
       userList: [],
       dialogVisible: false,
       editDialogVisible: false,
-      user: { uname: "", upwd: "", uaddress: "", uphone: "" },
+      user: { uname: "", upwd: "", uaddress: "", uphone: "",uemail:""},
       labelPosition: "right",
     };
   },
@@ -157,8 +164,18 @@ export default {
         uname: row.uname,
         uaddress: row.uaddress,
         uphone: row.uphone,
+        uemail: row.uemail
       };
+      console.log(row.uemail)
+      console.log("hi")
+      // console.log(this.user)
       this.editDialogVisible = true;
+    },
+    showAddDialog() {
+      this.user = {
+        
+      }
+      this.dialogVisible = true;
     },
     handleSizeChange(newSize) {
       // alert('newSize'+newSize)
