@@ -24,9 +24,6 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
-    @Autowired
-    JWTUtils jwt;
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     DataReturn login(@RequestBody User user) {
 //        System.out.println(user);
@@ -34,7 +31,7 @@ public class UserController {
             return new DataReturn(ReturnCode.FAIL);
         User u = userService.findByName(user.getUName());
         u.setUPwd("");
-        String s = jwt.create(u.getUId(), u.getUName());
+        String s = userService.getUserToken(u);
         return new DataReturn(new ArrayList() {{
             add(u);
         }}, ReturnCode.SUCCESS, s);

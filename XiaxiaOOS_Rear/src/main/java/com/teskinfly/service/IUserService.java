@@ -24,4 +24,6 @@ public interface IUserService {
     List<User> searchUser(String s);
 
     void delUser(Integer id);
+
+    String getUserToken(User user);
 }

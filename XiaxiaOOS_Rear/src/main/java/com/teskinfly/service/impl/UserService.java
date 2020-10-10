@@ -4,20 +4,26 @@ import com.teskinfly.dao.IUserDao;
 import com.teskinfly.domain.User;
 import com.teskinfly.pojo.Email.MailConstants;
 import com.teskinfly.service.IUserService;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import com.teskinfly.utils.JWTUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserService implements IUserService {
     @Autowired
+    RedisTemplate redisTemplate;
+    @Autowired
     IUserDao userDao;
     @Autowired
     RabbitTemplate rabbitTemplate;
+    @Autowired
+    JWTUtils jwtUtils;
     @Override
     public void addUser(User user) {
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
@@ -68,6 +74,14 @@ public class UserService implements IUserService {
     @Override
     public void delUser(Integer id) {
         userDao.delUser(id);
+    }
+
+    @Override
+    public String getUserToken(User user) {
+        String token = jwtUtils.create(user.getUId(), user.getUName());
+        redisTemplate.opsForValue().set(token,true);
+        redisTemplate.expire(token,20, TimeUnit.MINUTES);
+        return token;
     }
 
 

@@ -23,17 +23,12 @@ import java.util.List;
 public class AdminController {
     @Autowired
     AdminService adminService;
-    @Autowired
-    JWTUtils jwt;
-//    @Autowired
-//    RedisTemplate redisTemplate;
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     DataReturn login(@RequestBody Admin admin) {
-//        redisTemplate.opsForValue().append("teskinfly","handsome");//在这里测试
         if (!adminService.checkPwd(admin.getAName(), admin.getAPwd()))
             return new DataReturn(ReturnCode.FAIL);
         Admin byName = adminService.findByName(admin.getAName());
-        String s = jwt.create(byName.getAId(), byName.getAName());
-        return new DataReturn(ReturnCode.SUCCESS, s);
+        String token = adminService.getToken(byName);
+        return new DataReturn(ReturnCode.SUCCESS, token);
     }
 }
