@@ -60,7 +60,7 @@ export default {
 }
 .graph {
   margin-left: 30px;
-  background-color: greenyellow;
+  // background-color: greenyellow;
   width: 1000px;
   height: 450px;
 }

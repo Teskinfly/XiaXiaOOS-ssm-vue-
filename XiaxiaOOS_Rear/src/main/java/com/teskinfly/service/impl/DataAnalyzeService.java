@@ -17,7 +17,7 @@ import java.util.TreeMap;
 public class DataAnalyzeService {
     @Autowired
     IDataAnalyzeDao dataAnalyzeDao;
-    public ChartsOption getSaleData() {
+    public ChartsOption getSaleData(String begin, String end) {
         ChartsOption chartsOption = new ChartsOption();
         chartsOption.setTitle(chartsOption.new Title("各菜品的总销售量"));
         chartsOption.setLegend(chartsOption.new Legend(new ArrayList<String>() {
@@ -26,7 +26,14 @@ public class DataAnalyzeService {
             }
         }));
 //        List<Food> all = foodService.findAll();
-        List<FoodAndAmount> foodAndAmounts = dataAnalyzeDao.getFoodAndAmounts();
+
+        List<FoodAndAmount> foodAndAmounts = null;
+        if (begin == null) {
+            foodAndAmounts = dataAnalyzeDao.getFoodAndAmounts();
+        }
+        else {
+            foodAndAmounts = dataAnalyzeDao.getFoodAndAmountsByDate(begin,end);
+        }
         List<String> axisData = new ArrayList<>();
         List<String> seriesData = new ArrayList<>();
         for (FoodAndAmount faa: foodAndAmounts) {

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -28,8 +29,10 @@ public class DataAnalyzeController {
     @Autowired
     DataAnalyzeService dataAnalyzeService;
     @RequestMapping("/totalSale")
-    public DataReturn totalSale() {
-        ChartsOption saleData = dataAnalyzeService.getSaleData();
+    public DataReturn totalSale(@RequestParam(required = false) String begin,@RequestParam(required = false) String end) {
+        System.out.println(begin);
+        System.out.println(end);
+        ChartsOption saleData = dataAnalyzeService.getSaleData(begin, end);
         return new DataReturn(new ArrayList() {{
             add(saleData);
         }}, ReturnCode.SUCCESS, null);
@@ -37,7 +40,7 @@ public class DataAnalyzeController {
 
     @RequestMapping("/income")
     //练一下converter
-    public DataReturn income(Date beginDate, Date endDate) {
+    public DataReturn income(@RequestParam Date beginDate, @RequestParam Date endDate) {
 //        System.out.println(beginDate);
 //        System.out.println(endDate);
         List<Orders> byDate = orderService.findByDate(beginDate, endDate);

@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 18/12/2020 16:40:44
+ Date: 18/12/2020 21:15:03
 */
 
 SET NAMES utf8mb4;
@@ -67,6 +67,7 @@ CREATE TABLE `food`  (
   `f_img` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `f_c_id` int(11) NULL DEFAULT NULL,
   `f_des` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `f_inventory` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`f_id`) USING BTREE,
   INDEX `f_c_id`(`f_c_id`) USING BTREE,
   CONSTRAINT `f_c_id` FOREIGN KEY (`f_c_id`) REFERENCES `category` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -75,23 +76,23 @@ CREATE TABLE `food`  (
 -- ----------------------------
 -- Records of food
 -- ----------------------------
-INSERT INTO `food` VALUES (38, '红烧茄子', 6, 'images/food/fishqie.jpg', 8, '好吃');
-INSERT INTO `food` VALUES (39, '梅菜扣肉', 12, 'images/food/food4.jpg', 6, '好吃');
-INSERT INTO `food` VALUES (40, '炒饭', 7, 'images/food/food3.jpg', 3, '好吃');
-INSERT INTO `food` VALUES (41, '可乐', 3, 'images/food/food1.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (42, '水煮鱼', 20, 'images/food/waterFish.jpg', 7, '好吃');
-INSERT INTO `food` VALUES (43, '饺子', 6, 'images/food/jiaozi.jpg', 10, '好吃');
-INSERT INTO `food` VALUES (45, '鱼香肉丝', 15, 'images/food/AE077E0FA14E494C925A9D5410690C0B-123.jpg', 6, 'good');
-INSERT INTO `food` VALUES (48, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (51, '韩式酱汤', 15, 'images/food/3AC9182C4C554067914CE8D80F46B0CA-xiaxia.jpg', 4, '大虾、角瓜、土豆、元葱、冻豆腐、淘米水、韩式大酱、鸡精、味道。');
-INSERT INTO `food` VALUES (52, '可乐', 3, 'images/food/food1.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (62, '可乐', 3, 'images/food/food1.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (63, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (64, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (65, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (66, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (67, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (68, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
+INSERT INTO `food` VALUES (38, '红烧茄子', 6, 'images/food/fishqie.jpg', 8, '好吃', NULL);
+INSERT INTO `food` VALUES (39, '梅菜扣肉', 12, 'images/food/food4.jpg', 6, '好吃', NULL);
+INSERT INTO `food` VALUES (40, '炒饭', 7, 'images/food/food3.jpg', 3, '好吃', NULL);
+INSERT INTO `food` VALUES (41, '可乐', 3, 'images/food/food1.jpg', 1, '好喝', NULL);
+INSERT INTO `food` VALUES (42, '水煮鱼', 20, 'images/food/waterFish.jpg', 7, '好吃', NULL);
+INSERT INTO `food` VALUES (43, '饺子', 6, 'images/food/jiaozi.jpg', 10, '好吃', NULL);
+INSERT INTO `food` VALUES (45, '鱼香肉丝', 15, 'images/food/AE077E0FA14E494C925A9D5410690C0B-123.jpg', 6, 'good', NULL);
+INSERT INTO `food` VALUES (48, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
+INSERT INTO `food` VALUES (51, '韩式酱汤', 15, 'images/food/3AC9182C4C554067914CE8D80F46B0CA-xiaxia.jpg', 4, '大虾、角瓜、土豆、元葱、冻豆腐、淘米水、韩式大酱、鸡精、味道。', NULL);
+INSERT INTO `food` VALUES (52, '可乐', 3, 'images/food/food1.jpg', 1, '好喝', NULL);
+INSERT INTO `food` VALUES (62, '可乐', 3, 'images/food/food1.jpg', 1, '好喝', NULL);
+INSERT INTO `food` VALUES (63, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
+INSERT INTO `food` VALUES (64, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
+INSERT INTO `food` VALUES (65, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
+INSERT INTO `food` VALUES (66, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
+INSERT INTO `food` VALUES (67, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
+INSERT INTO `food` VALUES (68, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
 
 -- ----------------------------
 -- Table structure for message
@@ -156,14 +157,14 @@ CREATE TABLE `orders`  (
   `o_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`o_id`) USING BTREE,
   INDEX `o_u_id`(`o_u_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (1, '2020-12-18', '微信支付', 2, 10.00, '用户已接收', '广东省梅州市嘉应学院江北校区南区***');
+INSERT INTO `orders` VALUES (1, '2020-12-16', '微信支付', 2, 10.00, '用户已接收', '广东省梅州市嘉应学院江北校区南区***');
 INSERT INTO `orders` VALUES (2, '2020-12-18', '银行卡', 2, 45.00, '用户已接收', '广东省梅州市嘉应学院江北校区南区***');
-INSERT INTO `orders` VALUES (3, '2020-12-18', '支付宝', 2, 6.00, '饭店接单中', '广东省梅州市嘉应学院江北校区南区***');
+INSERT INTO `orders` VALUES (3, '2020-12-17', '支付宝', 2, 6.00, '饭店接单中', '广东省梅州市嘉应学院江北校区南区***');
 
 -- ----------------------------
 -- Table structure for user
@@ -175,14 +176,16 @@ CREATE TABLE `user`  (
   `u_pwd` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `u_pn` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `u_address` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `u_email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`u_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'teskinfly', '12315', '13421193765', '广东省梅州市嘉应学院江北校区南区***');
-INSERT INTO `user` VALUES (2, 'lqk', '123', '131511512', '广东省梅州市嘉应学院江北校区南区***');
-INSERT INTO `user` VALUES (10, '老王', '123', '1321532153', '广东省揭阳市*********');
+INSERT INTO `user` VALUES (1, 'teskinfly', '12315', '13421193765', '广东省梅州市嘉应学院江北校区南区***', NULL);
+INSERT INTO `user` VALUES (2, 'lqk', '123', '131511512', '广东省梅州市嘉应学院江北校区南区***', NULL);
+INSERT INTO `user` VALUES (10, '老王', '123', '1321532153', '广东省揭阳市*********', NULL);
+INSERT INTO `user` VALUES (11, '1', '112', '123', '1', 'teskinfly@qq.com');
 
 SET FOREIGN_KEY_CHECKS = 1;

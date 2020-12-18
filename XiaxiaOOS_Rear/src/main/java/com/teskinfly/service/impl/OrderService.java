@@ -72,7 +72,7 @@ public class OrderService implements IOrderService {
 
     @Override
     public List<Orders> findByDate(Date beginDate, Date endDate) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         System.out.println(simpleDateFormat.format(beginDate) + " " + simpleDateFormat.format(endDate));
         List<Orders> specificOrders = orderDao.getSpecificOrders(simpleDateFormat.format(beginDate), simpleDateFormat.format(endDate));
         return specificOrders;
