@@ -16,7 +16,7 @@ public class TableFood {
     String name;
     String desc;
     Integer price;
-    Integer amount;
+//    Integer amount;
     String img;
     String type;
     List<TableFood> next = new ArrayList<>();
@@ -35,7 +35,7 @@ public class TableFood {
 
     public boolean addFood(Food food) {
         TableFood tableFood = new TableFood();
-        tableFood.setAmount(food.getFAmount());
+//        tableFood.setAmount(food.getFAmount());
         tableFood.setDesc(food.getFDesc());
         tableFood.setName(food.getFName());
         tableFood.setPrice(food.getFPrice());
@@ -48,10 +48,13 @@ public class TableFood {
     @Override
     public String toString() {
         return "TableFood{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", rid='" + rid + '\'' +
+                ", name='" + name + '\'' +
                 ", desc='" + desc + '\'' +
-                ", price='" + price + '\'' +
-                ", amount='" + amount + '\'' +
+                ", price=" + price +
+                ", img='" + img + '\'' +
+                ", type='" + type + '\'' +
                 ", next=" + next +
                 '}';
     }

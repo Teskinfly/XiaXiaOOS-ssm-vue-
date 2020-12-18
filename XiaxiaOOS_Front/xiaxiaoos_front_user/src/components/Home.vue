@@ -286,19 +286,37 @@ export default {
         opayment: "",
         ouid: "",
         oprice: "",
-        ocontent: "",
+        // ocontent: "",
+        orderDetailList:[]
       };
+      let orderDetailList = []
       order.opayment = this.payment;
       order.ouid = JSON.parse(sessionStorage.getItem("user")).uid;
       order.oprice = this.totalPrice;
-      let content = "";
+      // let content = "";
+      // for (var i = 0; i < this.cart.length; i++) {
+      //   content += "#";
+      //   content += this.cart[i].name;
+      //   content += "-";
+      //   content += this.cart[i].price;
+      // }
+      // order.ocontent = content;
       for (var i = 0; i < this.cart.length; i++) {
-        content += "#";
-        content += this.cart[i].name;
-        content += "-";
-        content += this.cart[i].price;
+        let orderDetail = {
+          odFAmount:'',
+          odFId:'',
+          fname:''
+        }
+        // console.log('cart')
+        // console.log(this.cart[i])
+        orderDetail.odFAmount = this.cart[i].amount
+        orderDetail.odFId = this.cart[i].id
+        orderDetail.fname = this.cart[i].name
+        console.log(this.cart[i].name)
+        orderDetailList.push(orderDetail)
       }
-      order.ocontent = content;
+      console.log(orderDetailList)
+      order.orderDetailList = orderDetailList
       const { data: res } = await this.$axios.post("/order/addOrder", order);
       console.log(res);
       this.cart = [];

@@ -3,15 +3,15 @@
 
  Source Server         : con1
  Source Server Type    : MySQL
- Source Server Version : 50732
+ Source Server Version : 50528
  Source Host           : localhost:3306
  Source Schema         : roos_db
 
  Target Server Type    : MySQL
- Target Server Version : 50732
+ Target Server Version : 50528
  File Encoding         : 65001
 
- Date: 18/12/2020 16:40:44
+ Date: 01/08/2020 11:40:52
 */
 
 SET NAMES utf8mb4;
@@ -26,13 +26,12 @@ CREATE TABLE `admin`  (
   `a_pwd` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `a_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`a_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
 INSERT INTO `admin` VALUES ('lqk', '234', 1);
-INSERT INTO `admin` VALUES ('lzr', '123', 2);
 
 -- ----------------------------
 -- Table structure for category
@@ -67,6 +66,7 @@ CREATE TABLE `food`  (
   `f_img` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `f_c_id` int(11) NULL DEFAULT NULL,
   `f_des` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `f_amount` int(11) UNSIGNED NULL DEFAULT 0,
   PRIMARY KEY (`f_id`) USING BTREE,
   INDEX `f_c_id`(`f_c_id`) USING BTREE,
   CONSTRAINT `f_c_id` FOREIGN KEY (`f_c_id`) REFERENCES `category` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -75,23 +75,23 @@ CREATE TABLE `food`  (
 -- ----------------------------
 -- Records of food
 -- ----------------------------
-INSERT INTO `food` VALUES (38, '红烧茄子', 6, 'images/food/fishqie.jpg', 8, '好吃');
-INSERT INTO `food` VALUES (39, '梅菜扣肉', 12, 'images/food/food4.jpg', 6, '好吃');
-INSERT INTO `food` VALUES (40, '炒饭', 7, 'images/food/food3.jpg', 3, '好吃');
-INSERT INTO `food` VALUES (41, '可乐', 3, 'images/food/food1.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (42, '水煮鱼', 20, 'images/food/waterFish.jpg', 7, '好吃');
-INSERT INTO `food` VALUES (43, '饺子', 6, 'images/food/jiaozi.jpg', 10, '好吃');
-INSERT INTO `food` VALUES (45, '鱼香肉丝', 15, 'images/food/AE077E0FA14E494C925A9D5410690C0B-123.jpg', 6, 'good');
-INSERT INTO `food` VALUES (48, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (51, '韩式酱汤', 15, 'images/food/3AC9182C4C554067914CE8D80F46B0CA-xiaxia.jpg', 4, '大虾、角瓜、土豆、元葱、冻豆腐、淘米水、韩式大酱、鸡精、味道。');
-INSERT INTO `food` VALUES (52, '可乐', 3, 'images/food/food1.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (62, '可乐', 3, 'images/food/food1.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (63, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (64, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (65, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (66, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (67, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
-INSERT INTO `food` VALUES (68, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝');
+INSERT INTO `food` VALUES (38, '红烧茄子', 6, 'images/food/fishqie.jpg', 8, '好吃', 10);
+INSERT INTO `food` VALUES (39, '梅菜扣肉', 12, 'images/food/food4.jpg', 6, '好吃', 70);
+INSERT INTO `food` VALUES (40, '炒饭', 7, 'images/food/food3.jpg', 3, '好吃', 76);
+INSERT INTO `food` VALUES (41, '可乐', 3, 'images/food/food1.jpg', 1, '好喝', 80);
+INSERT INTO `food` VALUES (42, '水煮鱼', 20, 'images/food/waterFish.jpg', 7, '好吃', 100);
+INSERT INTO `food` VALUES (43, '饺子', 6, 'images/food/jiaozi.jpg', 10, '好吃', 20);
+INSERT INTO `food` VALUES (45, '鱼香肉丝', 15, 'images/food/AE077E0FA14E494C925A9D5410690C0B-123.jpg', 6, 'good', 1);
+INSERT INTO `food` VALUES (48, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', 3);
+INSERT INTO `food` VALUES (51, '韩式酱汤', 15, 'images/food/3AC9182C4C554067914CE8D80F46B0CA-xiaxia.jpg', 4, '大虾、角瓜、土豆、元葱、冻豆腐、淘米水、韩式大酱、鸡精、味道。', 0);
+INSERT INTO `food` VALUES (52, '可乐', 3, 'images/food/food1.jpg', 1, '好喝', 80);
+INSERT INTO `food` VALUES (62, '可乐', 3, 'images/food/food1.jpg', 1, '好喝', 80);
+INSERT INTO `food` VALUES (63, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', 3);
+INSERT INTO `food` VALUES (64, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', 3);
+INSERT INTO `food` VALUES (65, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', 3);
+INSERT INTO `food` VALUES (66, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', 3);
+INSERT INTO `food` VALUES (67, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', 3);
+INSERT INTO `food` VALUES (68, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', 3);
 
 -- ----------------------------
 -- Table structure for message
@@ -117,32 +117,6 @@ INSERT INTO `message` VALUES (1, '1楼', '2019-12-16 10:13:25', 2, 24);
 INSERT INTO `message` VALUES (1, '承包空屏', '2019-12-16 10:14:05', 14, 25);
 
 -- ----------------------------
--- Table structure for orderdetail
--- ----------------------------
-DROP TABLE IF EXISTS `orderdetail`;
-CREATE TABLE `orderdetail`  (
-  `od_id` int(11) NOT NULL AUTO_INCREMENT,
-  `od_o_id` int(11) NULL DEFAULT NULL,
-  `od_f_id` int(11) NULL DEFAULT NULL,
-  `od_f_amount` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`od_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of orderdetail
--- ----------------------------
-INSERT INTO `orderdetail` VALUES (10, 1, 41, '2');
-INSERT INTO `orderdetail` VALUES (11, 1, 52, '1');
-INSERT INTO `orderdetail` VALUES (12, 1, 48, '3');
-INSERT INTO `orderdetail` VALUES (13, 2, 41, '2');
-INSERT INTO `orderdetail` VALUES (14, 2, 52, '1');
-INSERT INTO `orderdetail` VALUES (15, 2, 48, '3');
-INSERT INTO `orderdetail` VALUES (16, 2, 42, '1');
-INSERT INTO `orderdetail` VALUES (17, 2, 51, '1');
-INSERT INTO `orderdetail` VALUES (18, 3, 62, '1');
-INSERT INTO `orderdetail` VALUES (19, 3, 41, '1');
-
--- ----------------------------
 -- Table structure for orders
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;
@@ -153,17 +127,17 @@ CREATE TABLE `orders`  (
   `o_u_id` int(11) NULL DEFAULT NULL,
   `o_price` decimal(10, 2) NULL DEFAULT NULL,
   `o_status` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `o_content` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `o_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`o_id`) USING BTREE,
   INDEX `o_u_id`(`o_u_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 80 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (1, '2020-12-18', '微信支付', 2, 10.00, '用户已接收', '广东省梅州市嘉应学院江北校区南区***');
-INSERT INTO `orders` VALUES (2, '2020-12-18', '银行卡', 2, 45.00, '用户已接收', '广东省梅州市嘉应学院江北校区南区***');
-INSERT INTO `orders` VALUES (3, '2020-12-18', '支付宝', 2, 6.00, '饭店接单中', '广东省梅州市嘉应学院江北校区南区***');
+INSERT INTO `orders` VALUES (78, '2020-08-01', '支付宝', 2, 26.00, '用户已接收', '#可乐-3#雪碧-4#炒饭-7#梅菜扣肉-12', '广东省梅州市嘉应学院江北校区南区***');
+INSERT INTO `orders` VALUES (79, '2020-08-01', '支付宝', 2, 47.00, '饭店接单中', '#韩式酱汤-15#梅菜扣肉-12#水煮鱼-20', '广东省梅州市嘉应学院江北校区南区***');
 
 -- ----------------------------
 -- Table structure for user

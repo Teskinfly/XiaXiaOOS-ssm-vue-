@@ -17,9 +17,10 @@ public interface IOrderDao {
             @Result(column = "o_u_id", property = "oUId"),
             @Result(column = "o_price", property = "oPrice"),
             @Result(column = "o_status", property = "oStatus"),
-            @Result(column = "o_content", property = "oContent"),
+//            @Result(column = "o_content", property = "oContent"),
             @Result(column = "o_address", property = "oAddress"),
-            @Result(column = "o_u_id", property = "user", one = @One(select = "com.teskinfly.dao.IUserDao.findById", fetchType = FetchType.EAGER))
+            @Result(column = "o_u_id", property = "user", one = @One(select = "com.teskinfly.dao.IUserDao.findById", fetchType = FetchType.EAGER)),
+            @Result(column = "o_id", property = "orderDetailList",many = @Many(select = "com.teskinfly.dao.IOrderDetailDao.findByOrderId", fetchType = FetchType.EAGER))
     })
     List<Orders> findAll(@Param("begin") int begin, @Param("end") int end);
 
@@ -27,7 +28,7 @@ public interface IOrderDao {
     @ResultMap("orderMap")
     Orders findById(Integer oId);
 
-    @Update("insert into orders (o_date, o_payment, o_u_id, o_price, o_status, o_content, o_address) values(#{oDate},#{oPayment},#{oUId},#{oPrice},#{oStatus},#{oContent},#{oAddress})")
+    @Update("insert into orders (o_id, o_date, o_payment, o_u_id, o_price, o_status, o_address) values(#{oId}, #{oDate},#{oPayment},#{oUId},#{oPrice},#{oStatus},#{oAddress})")
     void addOrder(Orders orders);
 
     @Update("update orders set o_status = #{oStatus} where o_id = #{oId}")
@@ -43,4 +44,6 @@ public interface IOrderDao {
     @Select("select *from orders where o_date >= #{begin} and o_date <= #{end} order by o_date desc")
     @ResultMap("orderMap")
     List<Orders> getSpecificOrders(@Param("begin") String begin, @Param("end") String end);
+    @Select("select max(o_id) from orders")
+    Integer getMaxId();
 }
