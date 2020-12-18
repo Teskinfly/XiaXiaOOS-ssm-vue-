@@ -2,10 +2,10 @@ package com.teskinfly.controller;
 
 import com.teskinfly.domain.Category;
 import com.teskinfly.domain.Food;
-import com.teskinfly.pojo.DataReturn;
-import com.teskinfly.pojo.ReturnCode;
-import com.teskinfly.pojo.TableFood;
-import com.teskinfly.pojo.TableReturn;
+import com.teskinfly.pojo.send.DataReturn;
+import com.teskinfly.pojo.send.ReturnCode;
+import com.teskinfly.pojo.send.TableFood;
+import com.teskinfly.pojo.send.TableReturn;
 import com.teskinfly.service.impl.CategoryService;
 import com.teskinfly.service.impl.FoodService;
 import com.teskinfly.utils.GenerateListTableFood;

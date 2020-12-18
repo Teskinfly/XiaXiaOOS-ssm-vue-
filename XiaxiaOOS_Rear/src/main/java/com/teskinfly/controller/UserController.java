@@ -1,15 +1,11 @@
 package com.teskinfly.controller;
 
 import com.teskinfly.domain.User;
-import com.teskinfly.pojo.DataReturn;
-import com.teskinfly.pojo.ReturnCode;
-import com.teskinfly.pojo.TableReturn;
+import com.teskinfly.pojo.send.DataReturn;
+import com.teskinfly.pojo.send.ReturnCode;
+import com.teskinfly.pojo.send.TableReturn;
 import com.teskinfly.service.impl.UserService;
-import com.teskinfly.utils.JWTUtils;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

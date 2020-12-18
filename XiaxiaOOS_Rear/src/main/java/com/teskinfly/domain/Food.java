@@ -14,19 +14,19 @@ public class Food implements Serializable {
     String fImg;
     Integer fCId;
     String fDesc;
-    Integer fAmount;
+//    Integer fAmount;
 
     public Food() {
 
     }
 
-    public Food(String fName, Integer fPrice, String fImg, Integer fCId, String fDesc, Integer fAmount) {
+    public Food(String fName, Integer fPrice, String fImg, Integer fCId, String fDesc) {
         this.fName = fName;
         this.fPrice = fPrice;
         this.fImg = fImg;
         this.fCId = fCId;
         this.fDesc = fDesc;
-        this.fAmount = fAmount;
+//        this.fAmount = fAmount;
     }
 
     @Override
@@ -38,7 +38,6 @@ public class Food implements Serializable {
                 ", fImg='" + fImg + '\'' +
                 ", fCId=" + fCId +
                 ", fDesc='" + fDesc + '\'' +
-                ", fAmount=" + fAmount +
                 '}';
     }
 }

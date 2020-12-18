@@ -1,6 +1,7 @@
 package com.teskinfly.dao;
 
 import com.teskinfly.domain.OrderDetail;
+import com.teskinfly.pojo.charts.FoodAndAmount;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -22,5 +23,4 @@ public interface IOrderDetailDao {
     public boolean addOD(OrderDetail orderDetail);
     @Delete("delete from orderdetail where od_o_id where #{oId}")
     public boolean delByOId(Integer oId);
-//    @Select("select sum(od_f_amount) from orderdetail group by od_f_id")
 }

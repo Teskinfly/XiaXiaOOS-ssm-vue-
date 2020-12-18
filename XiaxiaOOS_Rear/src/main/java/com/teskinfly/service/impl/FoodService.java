@@ -25,7 +25,7 @@ public class FoodService implements IFoodService {
 
     @Override
     public void addFood(Food food) {
-        food.setFAmount(0);
+//        food.setFAmount(0);
         foodDao.addFood(food);
     }
 

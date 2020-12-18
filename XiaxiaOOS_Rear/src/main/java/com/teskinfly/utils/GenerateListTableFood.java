@@ -2,7 +2,7 @@ package com.teskinfly.utils;
 
 import com.teskinfly.domain.Category;
 import com.teskinfly.domain.Food;
-import com.teskinfly.pojo.TableFood;
+import com.teskinfly.pojo.send.TableFood;
 import com.teskinfly.service.impl.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,20 +1,12 @@
 package com.teskinfly.controller;
 
 import com.teskinfly.domain.Admin;
-import com.teskinfly.domain.User;
-import com.teskinfly.pojo.DataReturn;
-import com.teskinfly.pojo.ReturnCode;
-import com.teskinfly.pojo.TableReturn;
+import com.teskinfly.pojo.send.DataReturn;
+import com.teskinfly.pojo.send.ReturnCode;
 import com.teskinfly.service.impl.AdminService;
-import com.teskinfly.service.impl.UserService;
-import com.teskinfly.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 @ResponseBody

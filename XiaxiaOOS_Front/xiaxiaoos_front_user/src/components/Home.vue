@@ -323,6 +323,7 @@ export default {
       localStorage.removeItem("cart");
       this.cartDialogVisible = false;
       this.$message.success("提交成功");
+      this.num = '1'
     },
     edit(row) {
       console.log(row);

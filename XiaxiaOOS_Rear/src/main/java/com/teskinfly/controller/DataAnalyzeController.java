@@ -1,12 +1,11 @@
 package com.teskinfly.controller;
 
 import com.teskinfly.domain.Orders;
-import com.teskinfly.pojo.DataReturn;
-import com.teskinfly.pojo.ReturnCode;
+import com.teskinfly.pojo.send.DataReturn;
+import com.teskinfly.pojo.send.ReturnCode;
 import com.teskinfly.pojo.charts.ChartsOption;
-import com.teskinfly.service.impl.FoodService;
+import com.teskinfly.service.impl.DataAnalyzeService;
 import com.teskinfly.service.impl.OrderService;
-import com.teskinfly.utils.GenerateChartsOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,28 +21,30 @@ import java.util.List;
 @CrossOrigin
 @ResponseBody
 public class DataAnalyzeController {
-    @Autowired
-    FoodService foodService;
+//    @Autowired
+//    FoodService foodService;
     @Autowired
     OrderService orderService;
-
+    @Autowired
+    DataAnalyzeService dataAnalyzeService;
     @RequestMapping("/totalSale")
     public DataReturn totalSale() {
-        ChartsOption chartsOption = GenerateChartsOption.generateSaleData(foodService);
+        ChartsOption saleData = dataAnalyzeService.getSaleData();
         return new DataReturn(new ArrayList() {{
-            add(chartsOption);
+            add(saleData);
         }}, ReturnCode.SUCCESS, null);
     }
 
     @RequestMapping("/income")
     //练一下converter
     public DataReturn income(Date beginDate, Date endDate) {
-        System.out.println(beginDate);
-        System.out.println(endDate);
+//        System.out.println(beginDate);
+//        System.out.println(endDate);
         List<Orders> byDate = orderService.findByDate(beginDate, endDate);
-        ChartsOption chartsOption = GenerateChartsOption.generateIncomeData(byDate);
+//        ChartsOption chartsOption = GenerateChartsOption.generateIncomeData(byDate);
+        ChartsOption incomeData = dataAnalyzeService.getIncomeData(byDate);
         return new DataReturn(new ArrayList() {{
-            add(chartsOption);
+            add(incomeData);
         }}, ReturnCode.SUCCESS, null);
     }
 }

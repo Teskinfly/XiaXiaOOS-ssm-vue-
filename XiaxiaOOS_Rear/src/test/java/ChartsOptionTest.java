@@ -1,16 +1,11 @@
-import com.teskinfly.pojo.DataReturn;
-import com.teskinfly.pojo.ReturnCode;
+import com.teskinfly.pojo.send.DataReturn;
+import com.teskinfly.pojo.send.ReturnCode;
 import com.teskinfly.pojo.charts.ChartsOption;
-import com.teskinfly.service.impl.FoodService;
-import com.teskinfly.utils.GenerateChartsOption;
 
-import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 //import com.teskinfly.pojo.charts.ChartsOption.*;
 public class ChartsOptionTest {
