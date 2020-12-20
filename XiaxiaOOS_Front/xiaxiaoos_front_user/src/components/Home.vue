@@ -59,21 +59,17 @@
             <div>名称：{{ this.currentFood.name }}</div>
             <div>价格：{{ this.currentFood.price }}</div>
             <div>描述：{{ this.currentFood.desc }}</div>
-            <div>销售量：{{ this.currentFood.amount }}</div>
+            <div>库存量：{{ this.currentFood.inventory }}</div>
             <div>
               图片：
               <img
                 :src="getImgUrl(this.currentFood.img)"
-                style="width:250px;heigth:250px"
+                style="width: 250px; heigth: 250px"
               />
             </div>
             <div>
               数量:
-              <el-input-number
-                v-model="num"
-                :min="1"
-                :max="10"
-              ></el-input-number>
+              <el-input-number v-model="num" :min="1"></el-input-number>
             </div>
           </el-card>
           <span slot="footer" class="dialog-footer">
@@ -125,8 +121,7 @@
             <el-table-column prop="ocontent" label="内容"> </el-table-column>
             <el-table-column prop="opayment" label="支付方式">
             </el-table-column>
-            <el-table-column prop="oaddress" label="地址">
-            </el-table-column>
+            <el-table-column prop="oaddress" label="地址"> </el-table-column>
             <el-table-column prop="oprice" label="总价"> </el-table-column>
             <el-table-column prop="ostatus" label="订单状态"></el-table-column>
             <el-table-column label="操作">
@@ -172,7 +167,7 @@ export default {
     // localStorage.removeItem("cart");
     //得到全部菜品信息
     const { data: res } = await this.$axios.get("food/findAllFood");
-    // console.log(res);
+    console.log(res);
     this.foodList = res.data;
     this.user = JSON.parse(sessionStorage.getItem("user"));
     //得到购物车信息
@@ -287,9 +282,9 @@ export default {
         ouid: "",
         oprice: "",
         // ocontent: "",
-        orderDetailList:[]
+        orderDetailList: [],
       };
-      let orderDetailList = []
+      let orderDetailList = [];
       order.opayment = this.payment;
       order.ouid = JSON.parse(sessionStorage.getItem("user")).uid;
       order.oprice = this.totalPrice;
@@ -303,27 +298,32 @@ export default {
       // order.ocontent = content;
       for (var i = 0; i < this.cart.length; i++) {
         let orderDetail = {
-          odFAmount:'',
-          odFId:'',
-          fname:''
-        }
+          odFAmount: "",
+          odFId: "",
+          fname: "",
+        };
         // console.log('cart')
         // console.log(this.cart[i])
-        orderDetail.odFAmount = this.cart[i].amount
-        orderDetail.odFId = this.cart[i].id
-        orderDetail.fname = this.cart[i].name
-        console.log(this.cart[i].name)
-        orderDetailList.push(orderDetail)
+        orderDetail.odFAmount = this.cart[i].amount;
+        orderDetail.odFId = this.cart[i].id;
+        orderDetail.fname = this.cart[i].name;
+        console.log(this.cart[i].name);
+        orderDetailList.push(orderDetail);
       }
-      console.log(orderDetailList)
-      order.orderDetailList = orderDetailList
+      console.log(orderDetailList);
+      order.orderDetailList = orderDetailList;
       const { data: res } = await this.$axios.post("/order/addOrder", order);
-      console.log(res);
+      // console.log(res);
       this.cart = [];
       localStorage.removeItem("cart");
-      this.cartDialogVisible = false;
-      this.$message.success("提交成功");
-      this.num = '1'
+      if (res.msg == "操作成功") {
+        this.cartDialogVisible = false;
+        this.$message.success("提交成功");
+      } else {
+        this.cartDialogVisible = false;
+        this.$message.error("库存不足");
+      }
+      this.num = "1";
     },
     edit(row) {
       console.log(row);

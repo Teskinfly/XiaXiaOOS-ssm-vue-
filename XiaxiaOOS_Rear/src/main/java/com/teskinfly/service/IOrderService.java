@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 public interface IOrderService {
-    List<Orders> findAll(int total, int pageNum);
+//    List<Orders> findAll(int total, int pageNum);
 
-    void addOrder(Orders order, User user);
+    boolean addOrder(Orders order, User user);
 
     Orders findById(Integer oId);
 
@@ -19,5 +19,5 @@ public interface IOrderService {
 
     void delOrders(Integer oId);
 
-    List<Orders> findByDate(Date beginDate, Date endDate);
+//    List<Orders> findByDate(Date beginDate, Date endDate);
 }

@@ -10,8 +10,8 @@
     <div class="seach"></div>
     <div class="orderList">
       <el-table :data="orderList" style="width: 100%">
-        <el-table-column prop="user.uname" label="用户名" width="100">
-        </el-table-column>
+        <el-table-column prop="oid" label="订单id"></el-table-column>
+        <el-table-column prop="user.uname" label="用户名" width="100"></el-table-column>
         <el-table-column prop="odate" label="日期"> </el-table-column>
         <el-table-column prop="ocontent" label="内容"> </el-table-column>
         <el-table-column prop="opayment" label="支付方式"> </el-table-column>
@@ -44,7 +44,7 @@
         :page-sizes="[5, 10, 15, 20]"
         :page-size="tableData.total"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="100"
+        :total="orderMax"
       >
       </el-pagination>
     </div>
@@ -88,6 +88,7 @@ export default {
       orderList: [],
       status: "",
       oid: "",
+      orderMax:"",
       //   orders: {
       //     oid: "",
       //     ocontent: "",
@@ -105,7 +106,9 @@ export default {
         "order/getOrders",
         this.tableData
       );
-      console.log(res);
+      console.log(this.tableData)
+      this.orderMax = res.total
+      // console.log(res.total);
       this.orderList = res.data;
     },
     handleSizeChange(newSize) {

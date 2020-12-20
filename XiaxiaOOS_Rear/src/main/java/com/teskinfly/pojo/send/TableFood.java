@@ -19,6 +19,7 @@ public class TableFood {
 //    Integer amount;
     String img;
     String type;
+    Integer inventory;
     List<TableFood> next = new ArrayList<>();
 
     public TableFood() {
@@ -42,6 +43,7 @@ public class TableFood {
         tableFood.setId(food.getFCId() + "-" + food.getFId());
         tableFood.setRid(food.getFId() + " ");
         tableFood.setImg(food.getFImg());
+        tableFood.setInventory(food.getFInventory());
         return next.add(tableFood);
     }
 

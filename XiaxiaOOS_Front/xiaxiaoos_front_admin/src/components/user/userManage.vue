@@ -22,9 +22,7 @@
           </el-input>
         </el-col>
         <el-col :span="10">
-          <el-button type="primary" @click="showAddDialog"
-            >添加用户</el-button
-          >
+          <el-button type="primary" @click="showAddDialog">添加用户</el-button>
           <el-dialog
             title="填写用户信息"
             :visible.sync="dialogVisible"
@@ -90,7 +88,7 @@
                 </el-form-item>
               </el-form>
               <el-button @click="editDialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="submitUserInfo()"
+              <el-button type="primary" @click="updateUserInfo()"
                 >确 定</el-button
               >
             </span>
@@ -108,7 +106,11 @@
         </el-table-column>
         <el-table-column prop="uphone" label="电话号码" width="250">
         </el-table-column>
-        <el-table-column prop="uemail" label="电子邮件" width="200"></el-table-column>
+        <el-table-column
+          prop="uemail"
+          label="电子邮件"
+          width="200"
+        ></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -151,7 +153,7 @@ export default {
       userList: [],
       dialogVisible: false,
       editDialogVisible: false,
-      user: { uname: "", upwd: "", uaddress: "", uphone: "",uemail:""},
+      user: { uname: "", upwd: "", uaddress: "", uphone: "", uemail: "" },
       labelPosition: "right",
     };
   },
@@ -161,20 +163,17 @@ export default {
   methods: {
     showEditDialog(row) {
       this.user = {
+        uid: row.uid,
         uname: row.uname,
         uaddress: row.uaddress,
         uphone: row.uphone,
-        uemail: row.uemail
+        uemail: row.uemail,
       };
-      console.log(row.uemail)
-      console.log("hi")
       // console.log(this.user)
       this.editDialogVisible = true;
     },
     showAddDialog() {
-      this.user = {
-        
-      }
+      this.user = {};
       this.dialogVisible = true;
     },
     handleSizeChange(newSize) {
@@ -193,11 +192,11 @@ export default {
       const that = this;
       this.$axios
         .post("/user/getUserList", this.tableData)
-        .then(function(response) {
-          // console.log(response.data.data);
+        .then(function (response) {
+          console.log(response.data.data);
           that.userList = response.data.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -213,12 +212,12 @@ export default {
       const that = this;
       this.$axios
         .post("/user/addUser", this.user)
-        .then(function(response) {
+        .then(function (response) {
           that.dialogVisible = false;
           that.getListUsers();
           that.$message.success("添加成功");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -234,20 +233,27 @@ export default {
         }
       ).catch((error) => error);
       if (box == "confirm") {
-        const result = await this.$axios.get("/user/delUser?uid=" + id)
-        console.log(result)
+        const result = await this.$axios.get("/user/delUser?uid=" + id);
+        console.log(result);
         this.getListUsers();
         this.$message.success("删除成功");
         return;
+      } else {
+        this.$message.success("取消成功");
       }
-      else {
-        this.$message.success("取消成功")
-      }
-      // 
+      //
+    },
+    async updateUserInfo() {
+      const that = this;
+      this.$axios.post("/user/updateUser", this.user).then(function (response) {
+        console.log("hi")
+        that.editDialogVisible = false;
+        that.getListUsers();
+        that.$message.success("添加成功");
+      });
     },
   },
 };
 </script>
 <style lang="less" scoped>
-
 </style>

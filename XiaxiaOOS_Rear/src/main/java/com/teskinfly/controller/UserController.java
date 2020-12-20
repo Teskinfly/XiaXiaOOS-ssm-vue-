@@ -68,4 +68,9 @@ public class UserController {
         userService.delUser(uId);
         return new DataReturn(ReturnCode.SUCCESS);
     }
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    DataReturn update(@RequestBody User user) {
+        userService.updateUser(user);
+        return new DataReturn(ReturnCode.SUCCESS);
+    }
 }

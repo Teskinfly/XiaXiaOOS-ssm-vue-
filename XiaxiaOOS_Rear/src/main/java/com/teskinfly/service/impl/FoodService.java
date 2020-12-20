@@ -44,4 +44,11 @@ public class FoodService implements IFoodService {
         int begin = (currentPage - 1) * limit;
         return foodDao.getLimitFood(begin, limit);
     }
+    public Integer getInventory(Integer fId){
+        return foodDao.getInventory(fId);
+    }
+    public boolean updateInventory(Integer inventory, Integer fId) {
+        boolean b = foodDao.updateInventory(inventory, fId);
+        return b;
+    }
 }

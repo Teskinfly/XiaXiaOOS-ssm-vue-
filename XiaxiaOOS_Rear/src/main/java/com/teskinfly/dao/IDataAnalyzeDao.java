@@ -1,5 +1,6 @@
 package com.teskinfly.dao;
 
+import com.teskinfly.pojo.charts.DateAndIncome;
 import com.teskinfly.pojo.charts.FoodAndAmount;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -21,5 +22,6 @@ public interface IDataAnalyzeDao {
             "group by od_f_id "
     )
     public List<FoodAndAmount> getFoodAndAmountsByDate(@Param("begin") String begin,@Param("end") String end);
-
+    @Select("select o_date as date, sum(o_price) as income from orders where o_date between #{begin} and #{end} group by o_date")
+    public List<DateAndIncome> getDateAndIncome(@Param("begin") String begin,@Param("end")String end);
 }

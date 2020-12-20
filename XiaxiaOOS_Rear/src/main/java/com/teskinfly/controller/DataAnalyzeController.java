@@ -40,12 +40,12 @@ public class DataAnalyzeController {
 
     @RequestMapping("/income")
     //练一下converter
-    public DataReturn income(@RequestParam Date beginDate, @RequestParam Date endDate) {
-//        System.out.println(beginDate);
-//        System.out.println(endDate);
-        List<Orders> byDate = orderService.findByDate(beginDate, endDate);
+    public DataReturn income(@RequestParam String beginDate, @RequestParam String endDate) {
+        System.out.println(beginDate);
+        System.out.println(endDate);
+//        List<Orders> byDate = orderService.findByDate(beginDate, endDate);
 //        ChartsOption chartsOption = GenerateChartsOption.generateIncomeData(byDate);
-        ChartsOption incomeData = dataAnalyzeService.getIncomeData(byDate);
+        ChartsOption incomeData = dataAnalyzeService.getIncomeData(beginDate,endDate);
         return new DataReturn(new ArrayList() {{
             add(incomeData);
         }}, ReturnCode.SUCCESS, null);

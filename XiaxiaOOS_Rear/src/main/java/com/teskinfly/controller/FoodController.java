@@ -8,7 +8,6 @@ import com.teskinfly.pojo.send.TableFood;
 import com.teskinfly.pojo.send.TableReturn;
 import com.teskinfly.service.impl.CategoryService;
 import com.teskinfly.service.impl.FoodService;
-import com.teskinfly.utils.GenerateListTableFood;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +30,22 @@ public class FoodController {
     FoodService foodService;
     @Autowired
     CategoryService categoryService;
-    @Autowired
-    GenerateListTableFood generateListTableFood;
 
     @RequestMapping("findAllFood")
     public TableReturn findAll(HttpServletRequest request) {
-        List<TableFood> generate = generateListTableFood.generate();
-        return new TableReturn(generate, ReturnCode.SUCCESS);
+        if (categoryService == null) {
+            throw new NullPointerException("缺少categoryService");
+        }
+        List<TableFood> result = new ArrayList<>();
+        List<Category> all = categoryService.findAll();
+        for (Category category : all) {
+            TableFood tableFood = new TableFood(category);
+            for (Food food : category.getFoods()) {
+                tableFood.addFood(food);
+            }
+            result.add(tableFood);
+        }
+        return new TableReturn(result, ReturnCode.SUCCESS);
     }
 
     @RequestMapping("/addCategory")

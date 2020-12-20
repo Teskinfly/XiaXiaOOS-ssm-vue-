@@ -1,5 +1,6 @@
 package com.teskinfly.service.impl;
 
+import com.teskinfly.dao.IFoodDao;
 import com.teskinfly.dao.IOrderDao;
 import com.teskinfly.dao.IOrderDetailDao;
 import com.teskinfly.domain.OrderDetail;
@@ -20,30 +21,35 @@ public class OrderService implements IOrderService {
     IOrderDao orderDao;
     @Autowired
     IOrderDetailDao orderDetailDao;
-    @Override
-    public List<Orders> findAll(int total, int pageNum) {
-        List<Orders> all = orderDao.findAll(total * (pageNum - 1), total);
+    @Autowired
+    IFoodDao foodDao;
+    public List<Orders> findOrders(int total, int pageNum) {
+        List<Orders> all = orderDao.findOrder(total * (pageNum - 1), total);
         setOContent(all);
         return all;
     }
 
     @Override
-    public void addOrder(Orders order, User user) {
+    public boolean addOrder(Orders order, User user) {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         order.setODate(simpleDateFormat.format(date));
         order.setOStatus("饭店接单中");
         order.setOAddress(user.getUAddress());
-        Integer maxId = orderDao.getMaxId();
+        Integer maxId = getMax();
         if (maxId == null) {
             maxId = 0;
         }
         order.setOId(maxId+1);
         for (OrderDetail orderDetail: order.getOrderDetailList()) {
+            Integer inventory = foodDao.getInventory(orderDetail.getOdFId());
+            if (inventory < orderDetail.getOdFAmount()) return false;
             orderDetail.setOdOId(order.getOId());
             orderDetailDao.addOD(orderDetail);
+            foodDao.updateInventory(inventory - orderDetail.getOdFAmount(),orderDetail.getOdFId());
         }
         orderDao.addOrder(order);
+        return true;
     }
 
     @Override
@@ -70,13 +76,13 @@ public class OrderService implements IOrderService {
         orderDetailDao.delByOId(oId);
     }
 
-    @Override
-    public List<Orders> findByDate(Date beginDate, Date endDate) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println(simpleDateFormat.format(beginDate) + " " + simpleDateFormat.format(endDate));
-        List<Orders> specificOrders = orderDao.getSpecificOrders(simpleDateFormat.format(beginDate), simpleDateFormat.format(endDate));
-        return specificOrders;
-    }
+//    @Override
+//    public List<Orders> findByDate(Date beginDate, Date endDate) {
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+////        System.out.println(simpleDateFormat.format(beginDate) + " " + simpleDateFormat.format(endDate));
+//        List<Orders> specificOrders = orderDao.getSpecificOrders(simpleDateFormat.format(beginDate), simpleDateFormat.format(endDate));
+//        return specificOrders;
+//    }
 
     public void changeStatus(String status, Integer oId) {
         if (status.equals("饭店接单中")) {
@@ -91,6 +97,8 @@ public class OrderService implements IOrderService {
         for (Orders orders: orderList) {
             List<OrderDetail> orderDetailList = orders.getOrderDetailList();
             StringBuffer sb = new StringBuffer();
+//            System.out.println(orderDetailList);
+            if (orderDetailList != null)
             for (OrderDetail orderDetail: orderDetailList) {
                 sb.append(orderDetail.getFName());
                 sb.append("*");
@@ -100,5 +108,11 @@ public class OrderService implements IOrderService {
             orders.setOContent(sb.toString());
             orders.setOrderDetailList(null);
         }
+    }
+    public void addOrderNormal(Orders orders) {
+        orderDao.addOrder(orders);
+    }
+    public Integer getMax() {
+        return orderDao.getMaxId();
     }
 }

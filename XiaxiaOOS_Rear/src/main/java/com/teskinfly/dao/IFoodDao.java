@@ -17,7 +17,8 @@ public interface IFoodDao {
             @Result(column = "f_img", property = "fImg"),
             @Result(column = "f_c_id", property = "fCId"),
             @Result(column = "f_des", property = "fDesc"),
-            @Result(column = "f_amount", property = "fAmount"),
+            @Result(column = "f_inventory", property = "fInventory")
+//            @Result(column = "f_amount", property = "fAmount"),
 //            @Result(column = "f_c_id", property = "category", one = @One(select = "com.teskinfly.dao.ICategoryDao.findById", fetchType = FetchType.EAGER))
     })
     List<Food> findAll();
@@ -49,4 +50,8 @@ public interface IFoodDao {
     @Select("select *from food where f_c_id = #{cId}")
     @ResultMap("foodMap")
     List<Food> findByCId(Integer cId);
+    @Update("update food set f_inventory = #{inventory} where f_id = #{fId}")
+    boolean updateInventory(@Param("inventory") Integer inventory, @Param("fId") Integer fId);
+    @Select("select f_inventory from food where f_id = #{fId}")
+    Integer getInventory(Integer fId);
 }

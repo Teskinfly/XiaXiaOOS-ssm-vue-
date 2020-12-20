@@ -26,8 +26,8 @@ public class UserService implements IUserService {
     JWTUtils jwtUtils;
     @Override
     public void addUser(User user) {
-        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
-        rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME,MailConstants.MAIL_ROUTING_KEY_NAME,user);
+//        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+//        rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME,MailConstants.MAIL_ROUTING_KEY_NAME,user);
         userDao.addUser(user);
     }
     @Override

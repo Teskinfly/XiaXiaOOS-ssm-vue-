@@ -38,8 +38,8 @@ export default {
   data() {
     return {
       user: {
-        uname: "lqk",
-        upwd: "123",
+        uname: "teskinfly",
+        upwd: "1223",
       },
       rules: {
         uname: [

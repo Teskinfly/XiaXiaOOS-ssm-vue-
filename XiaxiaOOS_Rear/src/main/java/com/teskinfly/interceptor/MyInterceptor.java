@@ -26,7 +26,7 @@ public class MyInterceptor implements HandlerInterceptor {
 //        }catch (Exception e) {
 //            return false;
         if (redisTemplate.opsForValue().get(authorization) != null) {
-            redisTemplate.expire(authorization,15, TimeUnit.MINUTES);
+            redisTemplate.expire(authorization,60, TimeUnit.MINUTES);
             return true;
         }
         return false;

@@ -39,7 +39,7 @@
       </el-card>
       <!-- categoryDialog -->
       <el-dialog title="分类" :visible.sync="categoryDialogVisible" width="30%">
-        <div style="margin: 20px;"></div>
+        <div style="margin: 20px"></div>
         <el-form label="left" label-width="80px" :model="category">
           <el-form-item label="分类名称">
             <el-input v-model="category.cname"></el-input>
@@ -77,6 +77,9 @@
           <el-form-item label="菜品价格">
             <el-input v-model="food.fprice"></el-input>
           </el-form-item>
+          <el-form-item label="菜品库存">
+            <el-input v-model="food.finventory"></el-input>
+          </el-form-item>
           <el-form-item label="图片">
             <el-upload
               action="http://localhost:8080/XiaXiaOOS/food/upload"
@@ -89,9 +92,7 @@
               list-type="picture"
             >
               <el-button size="small" type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">
-                不超过10M
-              </div>
+              <div slot="tip" class="el-upload__tip">不超过10M</div>
             </el-upload>
           </el-form-item>
         </el-form>
@@ -171,6 +172,7 @@ export default {
         const { data: res } = await this.$axios.get(
           "/food/getFoodById?fid=" + data.rid
         );
+        console.log(res.data[0])
         this.food = res.data[0];
         this.fileList = [
           {

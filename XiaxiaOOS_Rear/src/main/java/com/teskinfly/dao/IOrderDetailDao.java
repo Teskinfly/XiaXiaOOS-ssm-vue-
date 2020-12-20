@@ -21,6 +21,6 @@ public interface IOrderDetailDao {
     public List<OrderDetail> findByOrderId(Integer orderId);
     @Insert("insert into orderdetail (od_o_id, od_f_id, od_f_amount) values(#{odOId}, #{odFId},#{odFAmount})")
     public boolean addOD(OrderDetail orderDetail);
-    @Delete("delete from orderdetail where od_o_id where #{oId}")
+    @Delete("delete from orderdetail where od_o_id = #{oId}")
     public boolean delByOId(Integer oId);
 }

@@ -47,8 +47,10 @@ public class OrderController {
 
     @RequestMapping("/getOrders")
     public TableReturn getOrders(@RequestBody TableReturn tableReturn) {
-        List<Orders> all = orderService.findAll(tableReturn.getTotal(), tableReturn.getPageNum());
-        return new TableReturn(all, ReturnCode.SUCCESS);
+        List<Orders> all = orderService.findOrders(tableReturn.getTotal(), tableReturn.getPageNum());
+        TableReturn tr = new TableReturn(all, ReturnCode.SUCCESS);
+        tr.setTotal(orderService.getMax());
+        return tr;
     }
 
     @RequestMapping("/changeStatus")
@@ -66,8 +68,16 @@ public class OrderController {
     public DataReturn addOrder(@RequestBody Orders order) {
         if (order == null) return new DataReturn(ReturnCode.FAIL);
         User byId = userService.findById(order.getOUId());
-        orderService.addOrder(order, byId);
-        return new DataReturn(ReturnCode.SUCCESS);
+        int i = 300000;
+        System.out.println(order);
+//        orderService.addOrderNormal(order);
+        boolean b = orderService.addOrder(order, byId);
+        if (b) {
+            return new DataReturn(ReturnCode.SUCCESS);
+        }
+        else {
+            return new DataReturn(ReturnCode.FAIL);
+        }
     }
 
     @RequestMapping("/getOrdersByUser")
