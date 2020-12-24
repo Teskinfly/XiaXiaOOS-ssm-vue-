@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 18/12/2020 21:15:03
+ Date: 24/12/2020 16:08:24
 */
 
 SET NAMES utf8mb4;
@@ -29,12 +29,6 @@ CREATE TABLE `admin`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Records of admin
--- ----------------------------
-INSERT INTO `admin` VALUES ('lqk', '234', 1);
-INSERT INTO `admin` VALUES ('lzr', '123', 2);
-
--- ----------------------------
 -- Table structure for category
 -- ----------------------------
 DROP TABLE IF EXISTS `category`;
@@ -44,17 +38,6 @@ CREATE TABLE `category`  (
   `c_des` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`c_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of category
--- ----------------------------
-INSERT INTO `category` VALUES (1, '饮料', '好喝d');
-INSERT INTO `category` VALUES (3, '饭类', '好吃');
-INSERT INTO `category` VALUES (4, '汤类', '好香');
-INSERT INTO `category` VALUES (6, '肉类', '好吃的肉');
-INSERT INTO `category` VALUES (7, '鱼类', '');
-INSERT INTO `category` VALUES (8, '素菜', '');
-INSERT INTO `category` VALUES (10, '其他', '未被分类的其他种类');
 
 -- ----------------------------
 -- Table structure for food
@@ -71,28 +54,7 @@ CREATE TABLE `food`  (
   PRIMARY KEY (`f_id`) USING BTREE,
   INDEX `f_c_id`(`f_c_id`) USING BTREE,
   CONSTRAINT `f_c_id` FOREIGN KEY (`f_c_id`) REFERENCES `category` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 69 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of food
--- ----------------------------
-INSERT INTO `food` VALUES (38, '红烧茄子', 6, 'images/food/fishqie.jpg', 8, '好吃', NULL);
-INSERT INTO `food` VALUES (39, '梅菜扣肉', 12, 'images/food/food4.jpg', 6, '好吃', NULL);
-INSERT INTO `food` VALUES (40, '炒饭', 7, 'images/food/food3.jpg', 3, '好吃', NULL);
-INSERT INTO `food` VALUES (41, '可乐', 3, 'images/food/food1.jpg', 1, '好喝', NULL);
-INSERT INTO `food` VALUES (42, '水煮鱼', 20, 'images/food/waterFish.jpg', 7, '好吃', NULL);
-INSERT INTO `food` VALUES (43, '饺子', 6, 'images/food/jiaozi.jpg', 10, '好吃', NULL);
-INSERT INTO `food` VALUES (45, '鱼香肉丝', 15, 'images/food/AE077E0FA14E494C925A9D5410690C0B-123.jpg', 6, 'good', NULL);
-INSERT INTO `food` VALUES (48, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
-INSERT INTO `food` VALUES (51, '韩式酱汤', 15, 'images/food/3AC9182C4C554067914CE8D80F46B0CA-xiaxia.jpg', 4, '大虾、角瓜、土豆、元葱、冻豆腐、淘米水、韩式大酱、鸡精、味道。', NULL);
-INSERT INTO `food` VALUES (52, '可乐', 3, 'images/food/food1.jpg', 1, '好喝', NULL);
-INSERT INTO `food` VALUES (62, '可乐', 3, 'images/food/food1.jpg', 1, '好喝', NULL);
-INSERT INTO `food` VALUES (63, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
-INSERT INTO `food` VALUES (64, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
-INSERT INTO `food` VALUES (65, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
-INSERT INTO `food` VALUES (66, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
-INSERT INTO `food` VALUES (67, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
-INSERT INTO `food` VALUES (68, '雪碧', 4, 'images/food/7D1F314940E548988DFC34488A51C068-xuebi.jpg', 1, '好喝', NULL);
+) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for message
@@ -109,15 +71,6 @@ CREATE TABLE `message`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Records of message
--- ----------------------------
-INSERT INTO `message` VALUES (1, '老朱', '2019-12-01 11:01:49', 3, 21);
-INSERT INTO `message` VALUES (1, '真香', '2019-12-08 22:09:51', 1, 22);
-INSERT INTO `message` VALUES (7, '味道还行', '2019-12-16 09:40:19', 1, 23);
-INSERT INTO `message` VALUES (1, '1楼', '2019-12-16 10:13:25', 2, 24);
-INSERT INTO `message` VALUES (1, '承包空屏', '2019-12-16 10:14:05', 14, 25);
-
--- ----------------------------
 -- Table structure for orderdetail
 -- ----------------------------
 DROP TABLE IF EXISTS `orderdetail`;
@@ -126,22 +79,8 @@ CREATE TABLE `orderdetail`  (
   `od_o_id` int(11) NULL DEFAULT NULL,
   `od_f_id` int(11) NULL DEFAULT NULL,
   `od_f_amount` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`od_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of orderdetail
--- ----------------------------
-INSERT INTO `orderdetail` VALUES (10, 1, 41, '2');
-INSERT INTO `orderdetail` VALUES (11, 1, 52, '1');
-INSERT INTO `orderdetail` VALUES (12, 1, 48, '3');
-INSERT INTO `orderdetail` VALUES (13, 2, 41, '2');
-INSERT INTO `orderdetail` VALUES (14, 2, 52, '1');
-INSERT INTO `orderdetail` VALUES (15, 2, 48, '3');
-INSERT INTO `orderdetail` VALUES (16, 2, 42, '1');
-INSERT INTO `orderdetail` VALUES (17, 2, 51, '1');
-INSERT INTO `orderdetail` VALUES (18, 3, 62, '1');
-INSERT INTO `orderdetail` VALUES (19, 3, 41, '1');
+  INDEX `union`(`od_id`, `od_o_id`, `od_f_id`, `od_f_amount`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 16112 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for orders
@@ -156,15 +95,23 @@ CREATE TABLE `orders`  (
   `o_status` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `o_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`o_id`) USING BTREE,
-  INDEX `o_u_id`(`o_u_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+  INDEX `tt`(`o_u_id`, `o_date`, `o_price`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1179691 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Records of orders
+-- Table structure for test
 -- ----------------------------
-INSERT INTO `orders` VALUES (1, '2020-12-16', '微信支付', 2, 10.00, '用户已接收', '广东省梅州市嘉应学院江北校区南区***');
-INSERT INTO `orders` VALUES (2, '2020-12-18', '银行卡', 2, 45.00, '用户已接收', '广东省梅州市嘉应学院江北校区南区***');
-INSERT INTO `orders` VALUES (3, '2020-12-17', '支付宝', 2, 6.00, '饭店接单中', '广东省梅州市嘉应学院江北校区南区***');
+DROP TABLE IF EXISTS `test`;
+CREATE TABLE `test`  (
+  `c1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `c2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `c3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `c4` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `c5` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `tt`(`c1`, `c2`, `c3`, `c4`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user
@@ -173,19 +120,12 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `u_id` int(11) NOT NULL AUTO_INCREMENT,
   `u_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `u_pwd` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `u_pwd` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `u_pn` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `u_address` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `u_email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `u_money` bigint(255) NULL DEFAULT NULL,
   PRIMARY KEY (`u_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES (1, 'teskinfly', '12315', '13421193765', '广东省梅州市嘉应学院江北校区南区***', NULL);
-INSERT INTO `user` VALUES (2, 'lqk', '123', '131511512', '广东省梅州市嘉应学院江北校区南区***', NULL);
-INSERT INTO `user` VALUES (10, '老王', '123', '1321532153', '广东省揭阳市*********', NULL);
-INSERT INTO `user` VALUES (11, '1', '112', '123', '1', 'teskinfly@qq.com');
+) ENGINE = InnoDB AUTO_INCREMENT = 121223130 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;

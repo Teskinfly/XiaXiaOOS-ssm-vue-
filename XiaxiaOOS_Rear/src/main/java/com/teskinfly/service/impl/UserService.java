@@ -1,5 +1,6 @@
 package com.teskinfly.service.impl;
 
+import com.teskinfly.config.MyPasswordEncoder;
 import com.teskinfly.dao.IUserDao;
 import com.teskinfly.domain.User;
 import com.teskinfly.pojo.Email.MailConstants;
@@ -24,10 +25,13 @@ public class UserService implements IUserService {
     RabbitTemplate rabbitTemplate;
     @Autowired
     JWTUtils jwtUtils;
+    @Autowired
+    MyPasswordEncoder myPasswordEncoder;
     @Override
     public void addUser(User user) {
 //        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
 //        rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME,MailConstants.MAIL_ROUTING_KEY_NAME,user);
+        user.setUPwd(myPasswordEncoder.encode(user.getUPwd()));
         userDao.addUser(user);
     }
     @Override
@@ -43,9 +47,8 @@ public class UserService implements IUserService {
     @Override
     public boolean correctUser(String uName, String Pwd) {
         User byName = userDao.findByName(uName);
-        if (byName == null)
-            return false;
-        return byName.getUPwd().equals(Pwd) ? true : false;
+        String encodePassword = byName.getUPwd();
+        return myPasswordEncoder.match(encodePassword,Pwd);
     }
 
     @Override
